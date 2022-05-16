@@ -2,6 +2,19 @@ const express = require("express");
 const app = express();
 const port = 5000;
 
+// SQL set up
+var mysql      = require('mysql');
+var connection = mysql.createConnection(process.env.JAWSDB_URL);
+
+connection.connect();
+
+connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
+  if (error) throw error;
+  console.log('The solution is: ', results[0].solution);
+});
+
+connection.end();
+
 // Path for static files
 const path = require("path");
 
@@ -20,7 +33,6 @@ const restaurants = require("./routes/restaurants");
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
-
 
 app.get("/", (req, res) => {
   res.send("This is the home route");
