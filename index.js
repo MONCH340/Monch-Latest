@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = 5000;
 
 // Path for static files
 const path = require("path");
@@ -16,6 +16,11 @@ const categories = require("./routes/categories");
 const restaurants = require("./routes/restaurants");
 
 // Router Handling
+
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
+
 
 app.get("/", (req, res) => {
   res.send("This is the home route");
