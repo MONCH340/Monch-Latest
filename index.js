@@ -27,6 +27,6 @@ app.use("/categories", categories);
 app.use("/restaurants", restaurants);
 
 // Port set up
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
   console.log(`Example app listening on port ${port}`);
 });
