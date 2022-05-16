@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Users</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Users</h1>
+    <table class="usersTable">
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th>userId</th>
+          <th>userEmail</th>
+          <th>userBirthday</th>
+          <th>userLocation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><button>Edit</button></td>
+          <td>
+            <button>Delete</button>
+          </td>
+          <!--Person 1-->
+          <td>1</td>
+          <td>richie@lam.com</td>
+          <td>10-10-1996</td>
+          <td>San Francisco</td>
+        </tr>
+        <!--Person 2-->
+        <tr>
+          <td><button>Edit</button></td>
+          <td>
+            <button>Delete</button>
+          </td>
+          <td>2</td>
+          <td>kevin@luk.com</td>
+          <td>09-04-1994</td>
+          <td>Las Vegas</td>
+        </tr>
+        <!--Person 3-->
+        <tr>
+          <td><button>Edit</button></td>
+          <td>
+            <button>Delete</button>
+          </td>
+          <td>3</td>
+          <td>nathan@perkins.com</td>
+          <td>10-11-1834</td>
+          <td>San Francisco</td>
+        </tr>
+      </tbody>
+    </table>
+    <button>New User</button>
+    <!--Create-->
+    <div id="createUserDiv">
+      <form id="createUserForm" action="" method="post">
+        <h2>Create User:</h2>
+        <label for="email"> Email:</label>
+        <input type="email" value="Enter Email" name="email" id="email" />
+        <label for="birthday"> Birthday:</label>
+        <input type="date" id="birthday" name="birthday" />
+        <label for="location"> Location:</label>
+        <input type="text" value="Location" id="location" />
+        <button type="submit" value="Submit">Create User</button>
+        <button type="reset" value="Reset">Reset</button>
+      </form>
+    </div>
+
+    <!--Update-->
+    <div>
+      <form action="" method="post">
+        <h2>Update User Details</h2>
+        <label>Update User Email</label>
+        <input type="email" value="Selected user goes here" />
+        <label for="birthday"> Update Birthday:</label>
+        <input type="date" />
+        <label for="location"> Update Location:</label>
+        <input type="text" value="Selected user location goes here" />
+        <button type="submit" value="Submit">Save</button>
+        <button type="reset" value="Reset">Reset</button>
+      </form>
+    </div>
+    <a href="/Home">Home</a>
+  </body>
+</html>

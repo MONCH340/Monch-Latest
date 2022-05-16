@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Users</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Restaurants</h1>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th>restaurantId</th>
+          <th>restaurantAddress</th>
+          <th>restaurantCity</th>
+          <th>restaurantPriceRange</th>
+          <th>restaurantHasNutritionInfo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><button>Edit</button></td>
+          <td>
+            <button>Delete</button>
+          </td>
+          <!--Restaurant 1-->
+          <td>1</td>
+          <td>Hugo's Cellar</td>
+          <td>202 Fremont Street Experience</td>
+          <td>Las Vegas</td>
+          <td>No</td>
+        </tr>
+        <!--Restaurant 2-->
+        <tr>
+          <td><button>Edit</button></td>
+          <td>
+            <button>Delete</button>
+          </td>
+
+          <td>2</td>
+          <td>Cheesecake Factory</td>
+          <td>251 Geary St, San Francisco</td>
+          <td>San Francisco</td>
+          <td>Yes</td>
+        </tr>
+        <!--Restaurant 3-->
+        <tr>
+          <td><button>Edit</button></td>
+          <td>
+            <button>Delete</button>
+          </td>
+
+          <td>3</td>
+          <td>Jjanga AYCE Sushi</td>
+          <td>6125 S Fort Apache Rd</td>
+          <td>Las Vegas</td>
+          <td>No</td>
+        </tr>
+      </tbody>
+    </table>
+    <button>New Restaurant</button>
+
+    <!--Create-->
+    <div>
+      <form action="" method="post">
+        <h2>Create Restaurant:</h2>
+
+        <label> Enter Restaurant Name:</label>
+        <input type="text" />
+        <label>Enter Restaurant Address:</label>
+        <input type="text" />
+        <label>Enter Restaurant City</label>
+        <input type="text" />
+        <label>Select Restaurant Price Range</label>
+        <select>
+          <option value="$">$</option>
+          <option value="$$">$$</option>
+          <option value="$$$">$$$</option>
+        </select>
+      </form>
+    </div>
+
+    <!--Update-->
+    <div>
+      <form action="" method="post">
+        <h2>Update Restaurant For selectedRestaurant:</h2>
+
+        <label>Edit Restaurant Name:</label>
+        <input type="text" value="Currently selected restaurant" />
+        <label>Change Address:</label>
+        <input type="text" value="Currently saved address" />
+        <label> Change Restaurant City</label>
+        <input type="text" value="Currently saved city" />
+        <label>Change Restaurant Price Range</label>
+        <select>
+          <option value="$">$</option>
+          <option value="$$">$$</option>
+          <option value="$$$">$$$</option>
+        </select>
+        <label> "Has nutrition info:" </label>
+        <select>
+          <option>True</option>
+          <option>False</option>
+        </select>
+
+        <button type="submit" value="Submit">Save</button>
+        <button type="reset" value="Reset">Reset</button>
+      </form>
+    </div>
+
+    <a href="/Home">Home</a>
+  </body>
+</html>

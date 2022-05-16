@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Users</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Categories-Restaurants</h1>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th>Category</th>
+          <th>Restaurant</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><button>Edit</button></td>
+          <td>
+            <button>Delete</button>
+          </td>
+
+          <td>American</td>
+          <td>"Hugo's Cellar"</td>
+        </tr>
+
+        <tr>
+          <td><button>Edit</button></td>
+          <td>
+            <button>Delete</button>
+          </td>
+          <td>Romantic</td>
+          <td>"Hugo's Cellar"</td>
+        </tr>
+
+        <tr>
+          <td><button>Edit</button></td>
+          <td>
+            <button>Delete</button>
+          </td>
+          <td>American</td>
+          <td>"Cheesecake Factory"</td>
+        </tr>
+
+        <tr>
+          <td><button>Edit</button></td>
+          <td>
+            <button>Delete</button>
+          </td>
+
+          <td>Romantic</td>
+          <td>"Jjanga AYCE Sushi"</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button>New Restaurant with Category</button>
+
+    <!--Create-->
+    <div>
+      <form action="" method="post">
+        <h2>Create Restaurant with Category:</h2>
+        <label> Restaurant Name:</label>
+        <input type="text" />
+        <label> Category Name:</label>
+        <input type="text" />
+        <button type="submit" value="Submit">
+          Create Restaurant with Category
+        </button>
+        <button type="reset" value="Reset">Reset</button>
+      </form>
+    </div>
+
+    <!--Update-->
+    <div>
+      <form action="" method="post">
+        <h2>Update Restaurant with Category</h2>
+        <label>Edit Category Name</label>
+        <input type="text" value="Selected Category goes here" />
+        <label>Edit Restaurant Name</label>
+        <input type="text" value="Selected Restaurant goes here" />
+        <button type="submit" value="Submit">Save</button>
+        <button type="reset" value="Reset">Reset</button>
+      </form>
+    </div>
+
+    <a href="/Home">Home</a>
+  </body>
+</html>

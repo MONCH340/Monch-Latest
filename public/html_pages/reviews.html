@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=".styles.css">
+    <title>Monch - Reviews</title>
+</head>
+<body>
+
+    <h1>Reviews</h1>
+    <table>
+        <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th>reviewID</th>
+            <th>userEmail</th> <!--innerJoin required here-->
+            <th>reviewDate</th>
+            <th>reviewContent</th>
+            <th>restaurantID</th>
+            <th>reviewStar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><button>Edit</button></td>
+            <td><button>Delete</button></td>
+            <td>1</td>
+            <td>richie@lam.com</td>
+            <td>1/1/2012</td>
+            <td>"Wow, really good"</td>
+            <td>1</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td><button>Edit</button></td>
+            <td><button>Delete</button></td>
+            <td>2</td>
+            <td>kevin@luk.com</td>
+            <td>5/4/2022</td>
+            <td>"Great!"</td>
+            <td>2</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td><button>Edit</button></td>
+            <td><button>Delete</button></td>
+            <td>3</td>
+            <td>nathan@perkins.com</td>
+            <td>1/3/2004</td>
+            <td> "Tastes like my dry elbow"</td>
+            <td>2</td>
+            <td>1</td>
+        </tr>
+
+    </table>
+
+    <button>New Review</button>
+
+    <!--Create-->
+
+    <div id="createReviewDiv">
+        <form id="createReviewForm" action="" method="post">
+        <h2>Create Review:</h2>
+            <label for = "review"> Enter Review:</label>
+            <input type="text" name="review" id="review">
+            <label for = "restaurant"> Choose Restaurant:</label>
+            <select id="restaurant">
+                <option value = "Hugo's Cellar"> Hugo's Cellar </option>
+                <option value = "Cheesecake Factory">Cheesecake Factory</option>
+                <option value = "Jjanga">Jjanga</option>
+            </select>
+            <label for = "date"> Review Date:</label>
+            <input type="date" id="date">
+
+            <label for = "reviewStar"> Stars</label>
+            <select id="reviewStar">
+                <<option value = "1"> 1 </option>
+                <<option value = "2"> 2 </option>
+                <<option value = "3"> 3 </option>
+                <<option value = "4"> 4 </option>
+                <<option value = "5"> 5 </option>
+            </select>
+            <button type="submit" value="Submit">Create Review</button>
+            <button type="reset" value="Reset">Reset</button>
+        </form> </div>
+
+    <!--Update-->
+    <div id="updateReviewDiv">
+
+        <form id="updateReviewForm" action="" method="post">
+            <h2>Update Review For selectedRestaurant:</h2>
+            <label>Edit Review:</label>
+            <input type="text" name="reviewEdit" value="Selected review goes here"> </input>
+            <label for = "dateEdit"> Change Review Date:</label>
+            <input type="date" id="dateEdit">
+
+            <label for = "reviewStarEdit"> Change Stars</label>
+            <select id="reviewStarEdit">
+                <option value = "1"> 1 </option>
+                <option value = "2"> 2 </option>
+                <option value = "3"> 3 </option>
+                <option value = "4"> 4 </option>
+                <option value = "5"> 5 </option>
+
+            </select>
+            <button type="submit" value="Submit">Edit Review</button>
+            <button type="reset" value="Reset">Reset</button>
+        </form> </div>
+    <a href="/Home">Home</a>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Users</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Categories</h1>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th>categoryId</th>
+          <th>categoryName</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><button>Edit</button></td>
+          <td>
+            <button>Delete</button>
+          </td>
+          <td>1</td>
+          <td>American</td>
+        </tr>
+
+        <tr>
+          <td><button>Edit</button></td>
+          <td>
+            <button>Delete</button>
+          </td>
+
+          <td>2</td>
+          <td>Japanese</td>
+        </tr>
+
+        <tr>
+          <td><button>Edit</button></td>
+          <td>
+            <button>Delete</button>
+          </td>
+
+          <td>3</td>
+          <td>Romantic</td>
+        </tr>
+        <tr>
+          <td><button>Edit</button></td>
+          <td>
+            <button>Delete</button>
+          </td>
+
+          <td>4</td>
+          <td>Desserts</td>
+        </tr>
+      </tbody>
+    </table>
+    <button>New Category</button>
+    <!--Create-->
+    <div>
+      <form action="" method="post">
+        <h2>Create Category:</h2>
+        <label> Name:</label>
+        <input type="text" />
+        <button type="submit" value="Submit">Create Category</button>
+        <button type="reset" value="Reset">Reset</button>
+      </form>
+    </div>
+
+    <!--Update-->
+    <div>
+      <form action="" method="post">
+        <h2>Update category</h2>
+        <label>Edit Category Name</label>
+        <input type="text" value="Selected category goes here" />
+        <button type="submit" value="Submit">Save</button>
+        <button type="reset" value="Reset">Reset</button>
+      </form>
+    </div>
+    <a href="/Home">Home</a>
+  </body>
+</html>

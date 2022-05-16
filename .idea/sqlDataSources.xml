@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="509cd118-eaad-44f6-bee7-aca10b275813" name="DDL data source Mapping">
+      <data-sources ddl="b8d06e4d-db4a-4300-9365-44b9cde9e20e" />
+    </mapping>
+  </component>
+  <component name="SqlDataSourceStorage">
+    <option name="dataSources">
+      <list>
+        <State>
+          <option name="id" value="b8d06e4d-db4a-4300-9365-44b9cde9e20e" />
+          <option name="name" value="DDL data source" />
+          <option name="urls">
+            <array>
+              <option value="file://$PROJECT_DIR$/../../CS/CS340/MONCH340DDL.sql" />
+            </array>
+          </option>
+        </State>
+      </list>
+    </option>
+  </component>
+</project>
