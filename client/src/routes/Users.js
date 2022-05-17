@@ -30,7 +30,7 @@ function Users() {
   const [location, setLocation] = useState("")
 
   useEffect(() => {
-    fetch('http://localhost:5000/Users')
+    fetch('https://dry-bayou-57145.herokuapp.com/users')
       .then(response => response.json())
       .then(data => console.log(data))
   }, [users])
