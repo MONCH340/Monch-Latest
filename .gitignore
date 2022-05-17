@@ -1,6 +1,5 @@
-# config.js
+
 env
-# database.js
 node_modules
 node_modules/prettier/third-party.js
 node_modules/prettier/standalone.js
