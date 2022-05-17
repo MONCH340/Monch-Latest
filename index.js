@@ -1,14 +1,14 @@
 // App Set Up
 const express = require("express");
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;;
 const cors = require("cors");
 app.use(express.json());
 app.use(cors())
 
 // SQL Connection Set Up and Test
 const mysql = require('mysql2');
-const config = require('../MONCH/config')
+const config = require('./config')
 var connection = mysql.createPool(config.db);
 
 
