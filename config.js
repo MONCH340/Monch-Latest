@@ -1,0 +1,10 @@
+const config = {
+    db: {
+      host: "dfkpczjgmpvkugnb.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+      user: "qmbxhq8j6qiz32zp",
+      password: "wz76drfu7schok43",
+      database: "guic8igdw9aogppi",
+    },
+  };
+
+  module.exports = config;
