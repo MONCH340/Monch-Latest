@@ -1,19 +1,22 @@
+// App Set Up
 const express = require("express");
 const app = express();
 const port = 5000;
+const cors = require("cors");
+app.use(express.json());
+app.use(cors())
 
-// SQL set up
-var mysql      = require('mysql');
-var connection = mysql.createConnection(process.env.JAWSDB_URL);
+// SQL Connection Set Up and Test
+const mysql = require('mysql2');
+const config = require('../MONCH/config')
+var connection = mysql.createPool(config.db);
 
-connection.connect();
 
 connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
   if (error) throw error;
   console.log('The solution is: ', results[0].solution);
 });
 
-connection.end();
 
 // Path for static files
 const path = require("path");
@@ -28,9 +31,6 @@ const reviews = require("./routes/reviews");
 const categories = require("./routes/categories");
 const restaurants = require("./routes/restaurants");
 
-// Router Handling
-
-
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
 
@@ -43,7 +43,9 @@ app.use("/reviews", reviews);
 app.use("/categories", categories);
 app.use("/restaurants", restaurants);
 
+
+
 // Port set up
-app.listen(process.env.PORT || port, () => {
+app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

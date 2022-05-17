@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { sample_users } from "../sample_data/users"
 import UserRow from "../components/UserRow"
 import NavBar from "../components/NavBar";
@@ -28,6 +28,13 @@ function Users() {
   const [email, setEmail] = useState("")
   const [birthday, setBirthday] = useState("")
   const [location, setLocation] = useState("")
+
+  useEffect(() => {
+    fetch('http://localhost:5000/Users')
+      .then(response => response.json())
+      .then(data => console.log(data))
+  }, [users])
+
 
   function onChangeEmail(event) {
     setEmail(event.target.value)
