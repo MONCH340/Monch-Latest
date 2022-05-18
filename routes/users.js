@@ -9,8 +9,7 @@ router.get("/", async (req, res) => {
   try {
     const results = await database.promise().query(query_data)
     res.status(201).send(results[0])
-  } catch (err)
-  {
+  } catch (err) {
     console.log(err)
     res.status(400).send({
       error: err.message
@@ -18,9 +17,22 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Create a User
+router.post("/", async (req, res) => {
+
+})
 // Delete a user
-router.delete("/:id", (req, res) => {
-  res.json({test: "Deleting a Users"});
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params
+  let query_data = `DELETE FROM users WHERE userid = ${id}`;
+  try {
+    const results = await database.promise().query(query_data)
+    res.status(201).send(results[0])
+  } catch (err) {
+    console.log(err)
+    res.status(400).send({
+      error: err.message
+  })}
 });
 
 module.exports = router;
