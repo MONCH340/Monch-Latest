@@ -27,7 +27,6 @@ function Restaurants() {
     return (
         <div>
         <h1>Restaurant</h1>
-        <NavBar/>
         <h2>Restaurant Table</h2>
         <table>
             <tr>

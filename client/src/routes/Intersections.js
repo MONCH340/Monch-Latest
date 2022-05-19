@@ -16,7 +16,6 @@ function Intersections() {
   return (
     <div>
       <h1>Restaurants with Categories</h1>
-      <NavBar />
       <h2>Restaurants with Categories Table</h2>
       <table>
         <tr>

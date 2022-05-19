@@ -13,13 +13,22 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="/users" element={<Users />} />
-      <Route path="/reviews" element={<Reviews />} />
-      <Route path="/restaurants" element={<Restaurants />} />
-      <Route path="/categories" element={<Categories />} />
-      <Route path="/categories_restaurants" element={<Intersections />} />
-      <Route path="/coupons" element={<Coupons />} />
+    <Route path="/" element={<App />}>
+      <Route path="users" element={<Users />} />
+      <Route path="reviews" element={<Reviews />} />
+      <Route path="restaurants" element={<Restaurants />} />
+      <Route path="categories" element={<Categories />} />
+      <Route path="categories_restaurants" element={<Intersections />} />
+      <Route path="coupons" element={<Coupons />} />
+      <Route
+      path="*"
+      element={
+        <main style={{ padding: "1rem" }}>
+          <p>There's nothing here!</p>
+        </main>
+      }
+    />
+    </Route> 
     </Routes>
   </BrowserRouter>
 );

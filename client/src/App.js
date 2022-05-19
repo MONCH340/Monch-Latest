@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 import NavBar from "./components/NavBar";
 /* 
   1. Create Sample Data X
@@ -15,7 +15,7 @@ function App() {
     <div>
       <h1>MONCH</h1>
       <NavBar />
-      <p>This is the home page</p>
+      <Outlet />
     </div>
   );
 }

@@ -13,8 +13,6 @@ function Coupons() {
     return (
         <div>
             <h1>Coupon</h1>
-
-            <NavBar/>
             <h2>Coupon Table</h2>
             <table>
                 <tr>

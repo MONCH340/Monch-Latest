@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { sample_users } from "../sample_data/users"
 import ReviewRow from "../components/ReviewRow"
 import NavBar from "../components/NavBar";
+import Button from '@mui/material/Button';
 import { sample_reviews } from '../sample_data/reviews';
 
   /* 
@@ -90,7 +91,6 @@ function Reviews() {
     return (
         <div>
         <h1>Reviews</h1>
-        <NavBar></NavBar>
         <h2>Review Table</h2>
         <form onSubmit={searchReview}>
             <label htmlFor="search">Search for a Restaurant: </label>
@@ -148,11 +148,10 @@ function Reviews() {
             <label htmlFor="date">Date of Visit</label>
             <input type="date" name="date" id="date" onChange={onChangeDate} required/>
             <br/>
-            <button>Submit</button>
+            <Button variant="outlined">Submit</Button>
         </form>
         </div>
-        
-
+    
     );
 }
 

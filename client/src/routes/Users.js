@@ -79,7 +79,6 @@ function Users() {
   return (
     <div>
       <h1>User</h1>
-      <NavBar></NavBar>
       <h2>User Table</h2>
       <tbody>
         <table>

@@ -11,7 +11,6 @@ function Categories() {
   return (
     <div>
       <h1>Category</h1>
-      <NavBar />
       <h2>Category Table</h2>
       <table>
         <tr>
