@@ -3,20 +3,6 @@ import { sample_users } from "../sample_data/users"
 import UserRow from "../components/UserRow"
 import NavBar from "../components/NavBar";
 
-  /* 
-  1. Create Sample Data X
-  2. Create Table X
-  3. Create row components X 
-  4. Create form for insert X
-  5. create form for delete -----
-  6. create query for insert/delete ----- 
-
-  QUERIES NEEDED:
-  GET ALL USERS
-  DELETE A USER
-  ADD A USER
-  */
-
 
 function Users() {
   // State Set Up
@@ -52,7 +38,7 @@ function Users() {
 
   const postUser = async (newUser) => {
     //'https://dry-bayou-57145.herokuapp.com/users
-    fetch("http://localhost:5000/users/", {
+    fetch("https://dry-bayou-57145.herokuapp.com/users/", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -65,7 +51,7 @@ function Users() {
 
   const removeUser = (id) => 
     //'https://dry-bayou-57145.herokuapp.com/users/id
-    fetch(`http://localhost:5000/users/${id}`, {
+    fetch(`https://dry-bayou-57145.herokuapp.com/users/${id}`, {
       method: "DELETE",
     })
 
