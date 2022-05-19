@@ -29,11 +29,22 @@ function Users() {
   const [birthday, setBirthday] = useState("")
   const [location, setLocation] = useState("")
 
-  useEffect(() => {
+  const fetchUsers = () => {
     fetch('https://dry-bayou-57145.herokuapp.com/users')
       .then(response => response.json())
-      .then(data => console.log(data))
-  }, [users])
+      .then(data => setUsers(data))
+  }
+
+  const postUser = (newUser) => {
+    //'https://dry-bayou-57145.herokuapp.com/users
+    fetch("http://localhost:5000/users", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newUser)
+    })
+  }
 
 
   function onChangeEmail(event) {
@@ -52,15 +63,14 @@ function Users() {
   // Add SQL Insert
   function createUser(event) {
     event.preventDefault()
-    let newUser = {
-      userID: "SQLHERE", 
+    let newUser = { 
       userEmail: email, 
       userBirthday: birthday,
       userLocation: location
     }
-    const updatedUsers = [... users]
-    updatedUsers.push(newUser)
-    setUsers(updatedUsers)
+    //'https://dry-bayou-57145.herokuapp.com/users
+    postUser(newUser)
+    console.log(newUser)
   }
 
   // Add SQL Delete

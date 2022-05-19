@@ -1,4 +1,3 @@
-
 env
 node_modules
 node_modules/prettier/third-party.js
@@ -38,4 +37,3 @@ node_modules/prettier/bin-prettier.js
 node_modules/.package-lock.json
 node_modules/.bin/prettier
 test.html
-
