@@ -22,31 +22,11 @@ function Users() {
   // State Set Up
   const [users, setUsers] = useState(sample_users)
 
-  // Add SQL Query
-
   // Form Set Up
   const [email, setEmail] = useState("")
   const [birthday, setBirthday] = useState("")
   const [location, setLocation] = useState("")
-
-  const fetchUsers = () => {
-    fetch('https://dry-bayou-57145.herokuapp.com/users')
-      .then(response => response.json())
-      .then(data => setUsers(data))
-  }
-
-  const postUser = (newUser) => {
-    //'https://dry-bayou-57145.herokuapp.com/users
-    fetch("http://localhost:5000/users", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newUser)
-    })
-  }
-
-
+  
   function onChangeEmail(event) {
     setEmail(event.target.value)
   }
@@ -58,7 +38,37 @@ function Users() {
   function onChangeLocation(event) {
     setLocation(event.target.value)
   }
-  // Function Set Up
+
+  // API SET UP
+  const getUsers = () => {
+    fetch('https://dry-bayou-57145.herokuapp.com/users')
+      .then(response => response.json())
+      .then(data => setUsers(data))
+  }
+
+  useEffect(() => {
+    getUsers()
+  }, [])
+
+  const postUser = async (newUser) => {
+    //'https://dry-bayou-57145.herokuapp.com/users
+    fetch("http://localhost:5000/users/", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newUser)
+    })
+    .then(response => response.json())
+    .then(data => getUsers())
+  }
+
+  const removeUser = (id) => 
+    //'https://dry-bayou-57145.herokuapp.com/users/id
+    fetch(`http://localhost:5000/users/${id}`, {
+      method: "DELETE",
+    })
+
 
   // Add SQL Insert
   function createUser(event) {
@@ -68,17 +78,16 @@ function Users() {
       userBirthday: birthday,
       userLocation: location
     }
-    //'https://dry-bayou-57145.herokuapp.com/users
+    // Create API Call and update User if successful
     postUser(newUser)
-    console.log(newUser)
   }
 
   // Add SQL Delete
   function deleteUser(id) {
-    alert(`Deleting Review ${id}`)
-    const updatedUsers = [... users]
-    updatedUsers.filter(user => user["userID"] !== id)
-    console.log(updatedUsers)
+    removeUser(id)
+    const allUsers = [... users]
+    let updatedUsers = allUsers.filter(user => user.userID !== id)
+    setUsers(updatedUsers)
   }
 
   return (
