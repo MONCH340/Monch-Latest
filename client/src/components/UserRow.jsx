@@ -1,16 +1,21 @@
+import IconButton  from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
+
 function UserRow(props) {
   return (
-    <tr id={props.data.userID}>
-      <td>{props.data.userID}</td>
-      <td>{props.data.userEmail}</td>
-      <td>{props.data.userBirthday}</td>
-      <td>{props.data.userLocation}</td>
-      <td>
-        <button onClick={() => props.deleteUser(props.data.userID)}>
-          Delete
-        </button>
-      </td>
-    </tr>
+    <TableRow id={props.data.userID}>
+      <TableCell >{props.data.userID}</TableCell>
+      <TableCell >{props.data.userEmail}</TableCell >
+      <TableCell >{props.data.userBirthday}</TableCell >
+      <TableCell >{props.data.userLocation}</TableCell >
+      <TableCell >
+        <IconButton  aria-label="delete" size="small" onClick={() => props.deleteUser(props.data.userID)}>
+          <DeleteIcon />
+        </IconButton>
+      </TableCell >
+    </TableRow>
   );
 }
 

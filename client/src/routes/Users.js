@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import { sample_users } from "../sample_data/users"
 import UserRow from "../components/UserRow"
-import NavBar from "../components/NavBar";
-
+import {Table, TableCell, TableRow, TableBody, TableContainer, TextField } from '@mui/material/';
+import { TableHead } from '@mui/material';
 
 function Users() {
   // State Set Up
@@ -79,21 +79,24 @@ function Users() {
   return (
     <div>
       <h1>User</h1>
-      <h2>User Table</h2>
-      <tbody>
-        <table>
-          <tr>
-            <th>userID</th>
-            <th>userEmail</th>
-            <th>userBirthday</th>
-            <th>userLocation</th>
-            <th>delete</th>
-          </tr>
+      <TableContainer >
+        <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>ID</TableCell>
+            <TableCell>Email</TableCell>
+            <TableCell>Birthday</TableCell>
+            <TableCell>Location</TableCell>
+            <TableCell>Remove</TableCell>
+          </TableRow>
+        </TableHead>
+          <TableBody>
           {users.map((user) => {
             return <UserRow data={user} deleteUser={deleteUser}/>
           })}
-        </table>
-      </tbody>
+          </TableBody>
+        </Table>
+      </TableContainer>
       <form onSubmit={createUser}>
         <h2>Create a new User</h2>
         <label htmlFor="userEmail">Email:</label>
