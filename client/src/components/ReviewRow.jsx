@@ -1,17 +1,24 @@
+import IconButton  from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
+
+
 function ReviewRow(props) {
   return (
-    <tr id={props.data.reviewID}>
-      <td>{props.data.reviewID}</td>
-      <td>{props.data.restaurantName}</td>
-      <td>{props.data.reviewContent}</td>
-      <td>{props.data.reviewDate}</td>
-      <td>{props.data.reviewStar}</td>
-      <td>
-        <button onClick={() => props.deleteReview(props.data.reviewID)}>
-          Delete
-        </button>
-      </td>
-    </tr>
+    <TableRow id={props.data.reviewID}>
+      <TableCell>{props.data.reviewID}</TableCell>
+      <TableCell>{props.data.restaurantName}</TableCell>
+      <TableCell>{props.data.reviewContent}</TableCell>
+      <TableCell>{props.data.reviewStar}</TableCell>
+      <TableCell>{props.data.userEmail}</TableCell>
+      <TableCell>{props.data.reviewDate}</TableCell>
+      <TableCell>
+      <IconButton  aria-label="delete" size="small"onClick={() => props.deleteReview(props.data.reviewID)}>
+          <DeleteIcon />
+      </IconButton>
+      </TableCell>
+    </TableRow>
   );
 }
 

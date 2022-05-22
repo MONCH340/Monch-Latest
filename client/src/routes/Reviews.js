@@ -1,30 +1,17 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { sample_users } from "../sample_data/users"
 import ReviewRow from "../components/ReviewRow"
 import NavBar from "../components/NavBar";
 import Button from '@mui/material/Button';
 import { sample_reviews } from '../sample_data/reviews';
+import {Table, TableCell, TableRow, TableBody, TableContainer, TextField } from '@mui/material/';
+import { TableHead  } from '@mui/material';
 
-  /* 
-  1. Create Sample Data X
-  2. Create Table X
-  3. Create row components X
-  4. Create form for insert X 
-  5. create form for delete X 
-  6. create query for insert/delete 
-  7. search review x 
-
-  QUERIES NEEDED:
-  SELECT ALL REVIEWS - DO AN INNER JOIN FOR USERS EMAIL
-  SELECT ALL USERS -  NEEDED FOR CREATE A REVIEW
-  SELECT ALL RESTAURANT - NEEDED FOR CREATE A REVIEW
-  DELETE A REVIEW 
-  SELECT A RESTURANT REVIEW - INNER JOIN FOR SEARCH
-  */
 
 function Reviews() {
     // State Set Up
     const [reviews, setReviews] = useState(sample_reviews)
+    const [users, setUsers] = useState(sample_users)
     
     // Add SQL Query 
     // Form Set Up
@@ -37,16 +24,13 @@ function Reviews() {
     function createReview(event) {
         event.preventDefault()
         const newReview = {
-            reviewID: "SQLHERE",
-            userEmail: "SQLHERE",
-            restaurantName: "SQLHERE",
-            reviewContent: reviewContent,
-            reviewStar: reviewStar, 
-            reviewDate: reviewDate, 
+            userID,
+            restaurantID,
+            reviewContent,
+            reviewStar,
+            reviewDate,
         }
-        const updatedReview = [... reviews]
-        updatedReview.push(newReview)
-        setReviews(updatedReview)
+        console.log(newReview)
     }
 
     function onChangeUserID(event) {
@@ -77,50 +61,83 @@ function Reviews() {
 
     // Search SQL
     const [search, setSearch] = useState("")
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/reviews/${search}`)
+        .then(response => response.json())
+        .then(data => setReviews(data))
+    }, [search])
+
+
     function searchReview(event) {
         event.preventDefault()
         alert(`Searching for term: ${search}`)
+        fetch(`http://localhost:5000/reviews/${search}`)
+        .then(response => response.json())
+        .then(data => setReviews(data))
     }
 
     function onChangeSearch(event) {
         setSearch(event.target.value)
     }
 
+  // API SET UP
+  // https://dry-bayou-57145.herokuapp.com/reviews
+  const getReviews = () => {
+    fetch('http://localhost:5000/reviews')
+      .then(response => response.json())
+      .then(data => setReviews(data))
+  }
 
-    // Return Data
+  const getUsers = () => {
+    fetch('http://localhost:5000/users')
+      .then(response => response.json())
+      .then(data => setUsers(data))
+  }
+  
+  useEffect(() => {
+    getReviews()
+    getUsers()
+  }, [])
+  
+  // Return Data
     return (
         <div>
-        <h1>Reviews</h1>
-        <h2>Review Table</h2>
-        <form onSubmit={searchReview}>
-            <label htmlFor="search">Search for a Restaurant: </label>
-            <input type="text" id="search" onChange={e => onChangeSearch(e)}/>
-            <button>Submit</button>
-        </form>
+            <h1>Review</h1>
+            <h3>Search for a Restaurant:</h3>
+            <br />
+            <TextField  size="small" variant="outlined" id="search" onChange={e => onChangeSearch(e)}/>
         <br/>
         <tbody>
-            <table>
-            <tr>
-                <th>reviewID</th>
-                <th>userEmail</th>
-                <th>restaurantName</th>
-                <th>reviewContent</th>
-                <th>reviewStar</th>
-                <th>reviewDate</th>
-            </tr>
+        <TableContainer >
+            <Table>
+            <TableHead>
+            <TableRow>
+                <TableCell>Review ID</TableCell>
+                <TableCell>Restaurant</TableCell>
+                <TableCell>Review</TableCell>
+                <TableCell>Rating</TableCell>
+                <TableCell>User Email</TableCell>
+                <TableCell>Date</TableCell>
+            </TableRow>
+            </TableHead>
+            <TableBody>
             {reviews.map((review) => {
                 return <ReviewRow data={review} deleteReview={deleteReview} />
             })}
-            </table>
+            </TableBody>
+            </Table>
+            </TableContainer>
         </tbody>
         <br/>
         <form onSubmit={createReview}>
             <h2>Create a Review</h2>
             <label htmlFor="userEmail">User Email</label>
-                <select id="userEmail" name="userEmail" onChange={onChangeUserID}>
-                <option value="3">kevin@luk.com</option>
-                <option value="2">nathan@perkins.com</option>
-                <option value="1">richie@lam.com</option>
+                <select id="userEmail" name="userEmail" onChange={onChangeUserID} required>
+                    <option disabled selected value> -- select an option -- </option>
+                    {users.map((user) => {
+                        return <option value={user.id}>{user.userEmail}</option>
+                    })}
                 </select>
             <br/>
             <br/>
@@ -138,17 +155,15 @@ function Reviews() {
             <br/>
             <label htmlFor="reviewStar">reviewStar</label>
                 <select id="reviewStar" name="reviewStar" onChange={onChangeReviewStar} required>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+                {[1,2,3,4,5].map((rating) => {
+                        return <option value={rating}>{rating}</option>
+                })}
                 </select>
             <br/>
             <label htmlFor="date">Date of Visit</label>
             <input type="date" name="date" id="date" onChange={onChangeDate} required/>
             <br/>
-            <Button variant="outlined">Submit</Button>
+            <Button type="submit" variant="outlined">Submit</Button>
         </form>
         </div>
     
