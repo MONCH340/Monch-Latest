@@ -1,60 +1,120 @@
-import React, {useState} from 'react';
-import NavBar from "../components/NavBar";
+import React, {useEffect, useState} from 'react';
 import { sample_restaurants } from "../sample_data/restaurants"
 import { sample_coupons } from "../sample_data/coupons"
 import RestaurantRow from "../components/RestaurantRow"
 import RestaurantSelect from "../components/RestaurantSelect"
 import CouponSelect from "../components/CouponSelect"
-    /* 
-    1. Create Sample Data 
-    2. Create Table 
-    3. Create row components 
-    4. Create form for insert
-    5. create form for delete 
-    6. create query for insert/delete
+import {Table, TableCell, TableRow, TableBody, TableContainer, TextField } from '@mui/material/';
+import { TableHead  } from '@mui/material';
 
-    QUERIES NEEDED:
-    GET ALL RESTAURANTS - inner join with coupon
-    DELETE A RESTAURANT
-    */
 
 function Restaurants() {
     const [restaurants, setRestaurants] = useState(sample_restaurants)
     const [coupons, setCoupons] = useState(sample_coupons)
-    function deleteRestaurant () {
-        alert("Deleting Store")
+
+    function deleteRestaurant (id) {
+        alert(`Deleting ${id}`)
     }
+
+    const getRestaurants = () => {
+        fetch('http://localhost:5000/restaurants')
+          .then(response => response.json())
+          .then(data => setRestaurants(data))
+    }
+
+    useEffect(() => {
+        getRestaurants()
+    }, [])
+
+    // Form Set Up
+    const [restaurantName, setRestaurantName] = useState("")
+    const [restaurantAddress, setRestaurantAddress] = useState("")
+    const [restaurantCity, setRestaurantCity] = useState("")
+    const [restaurantPriceRange, setRestaurantPriceRange] = useState(1)
+    const [restaurantHasNutritionInfo, setRestaurantHasNutritionInfo] = useState("TRUE")
+   
+    function onChangeRestaurantName(event) {
+        setRestaurantName(event.target.value)
+    }
+
+    function onChangeRestaurantAddress(event) {
+        setRestaurantAddress(event.target.value)
+    }
+
+    function onChangeRestaurantCity(event) {
+        setRestaurantCity(event.target.value)
+    }
+
+    function onChangeRestaurantPriceRange(event) {
+        setRestaurantPriceRange(event.target.value)
+    }
+
+    function onChangeRestaurantHasNutritionInfo(event) {
+        setRestaurantHasNutritionInfo(event.target.value)
+    }
+
+    function createRestaurant(event) {
+        event.preventDefault()
+        let newRestaurant = { 
+            restaurantName,
+            restaurantAddress,
+            restaurantCity,
+            restaurantPriceRange,
+            restaurantHasNutritionInfo,
+          }
+          postRestaurant(newRestaurant)
+        // Create API Call and update User if successful
+    }
+
+    const postRestaurant = async (newRestaurant) => {
+        fetch("http://localhost:5000/restaurants", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newRestaurant)
+          })
+          .then(response => response.json())
+          .then(data => getRestaurants())
+    }
+
     return (
         <div>
         <h1>Restaurant</h1>
-        <h2>Restaurant Table</h2>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Address</th>
-                <th>City</th>
-                <th>Price Range</th>
-                <th>Has Nutrition Info</th>
-                <th>Deals</th>
-            </tr>
+        <TableContainer>
+        <Table>
+            <TableHead>
+            <TableRow>
+                <TableCell>ID</TableCell>
+                <TableCell>Restaurant</TableCell>
+                <TableCell>Address</TableCell>
+                <TableCell>City</TableCell>
+                <TableCell>Price Range</TableCell>
+                <TableCell>Has Nutrition Info</TableCell>
+                <TableCell>Deals</TableCell>
+            </TableRow>
+            </TableHead>
+            <TableBody>
             {restaurants.map((restaurant) => {
                 return <RestaurantRow data={restaurant} deleteRestaurants={deleteRestaurant} />
             })}
-        </table>
-        <form>
-            <h2>Create a Restaurant</h2>
+            </TableBody>
+        </Table>
+        </TableContainer>
+        <br />
+        <h2> Add a Restaurant</h2>
+        <form onSubmit={createRestaurant}>
             <label htmlFor="restaurantName">Enter a restaurantName</label>
-            <input type="text" name="restaurantName" id="restaurantName" />
+            <input required type="text" name="restaurantName" id="restaurantName" onChange={e => onChangeRestaurantName(e)}/>
             <br/>
             <label htmlFor="restaurantAddress">Enter a restaurantAddress</label>
-            <input type="text" name="restaurantAddress" id="restaurantAddress"/>
+            <input required type="text" name="restaurantAddress" id="restaurantAddress" onChange={e => onChangeRestaurantAddress(e)}/>
             <br/>
             <label htmlFor="City">Enter a City</label>
-            <input type="text" name="restaurantCity" id="restaurantCity" />
+            <input required type="text" name="restaurantCity" id="restaurantCity" onChange={e => onChangeRestaurantCity(e)}/>
             <br/>
             <label htmlFor="restaurantPriceRange">Enter a price Range</label>
-            <select name="restaurantPriceRange" id="restaurantPriceRange">
+            <select required name="restaurantPriceRange" id="restaurantPriceRange" onChange={e => onChangeRestaurantPriceRange(e)}>
                 <option value="1">$0-$10</option>
                 <option value="2">$11-$20</option>
                 <option value="3">$20-$30</option>
@@ -63,7 +123,8 @@ function Restaurants() {
             </select>
             <br/>
             <label htmlFor="restaurantHasNutritionInfo">Does it have nutrition information</label>
-            <select name="restaurantHasNutritionInfo" id="restaurantHasNutritionInfo">
+            <select required name="restaurantHasNutritionInfo" id="restaurantHasNutritionInfo" onChange={e => onChangeRestaurantHasNutritionInfo(e)}>
+        
                 <option value="TRUE">TRUE</option>
                 <option value="FALSE">FALSE</option>
             </select>

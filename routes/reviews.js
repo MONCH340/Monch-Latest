@@ -40,6 +40,23 @@ router.get("/:search", async (req, res) => {
   }
 });
 
+// Handle a post request
+router.post("/", async (req, res) => {
+  const {restaurantName, restaurantAddress, restaurantCity, restaurantPriceRange, restaurantHasNutritionInfo} = req.body
+  let query_data = `INSERT INTO Restaurants (restaurantName,restaurantAddress,restaurantCity,restaurantPriceRange, restaurantHasNutritionInfo)\
+  VALUES ("${restaurantName}", "${restaurantAddress}", "${restaurantCity}", ${restaurantPriceRange}, ${restaurantHasNutritionInfo})`
+  try {
+    const results = await database.promise().query(query_data)
+    // Return all data in json format
+    res.status(201).send(results[0])
+  } catch (err) {
+    console.log(err)
+    res.status(400).send({
+      error: err.message
+    })
+  }
+});
+
 // Delete a user
 router.delete("/:id", async (req, res) => {
   const { id } = req.params

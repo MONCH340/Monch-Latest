@@ -43,8 +43,6 @@ app.use("/reviews", reviews);
 app.use("/categories", categories);
 app.use("/restaurants", restaurants);
 
-
-
 // Port set up
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

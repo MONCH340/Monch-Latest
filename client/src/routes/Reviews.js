@@ -1,17 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import { sample_users } from "../sample_data/users"
 import ReviewRow from "../components/ReviewRow"
-import NavBar from "../components/NavBar";
 import Button from '@mui/material/Button';
 import { sample_reviews } from '../sample_data/reviews';
 import {Table, TableCell, TableRow, TableBody, TableContainer, TextField } from '@mui/material/';
 import { TableHead  } from '@mui/material';
+import { sample_restaurants } from '../sample_data/restaurants';
 
 
 function Reviews() {
     // State Set Up
     const [reviews, setReviews] = useState(sample_reviews)
     const [users, setUsers] = useState(sample_users)
+    const [restaurants, setRestaurants] = useState(sample_restaurants)
+
     
     // Add SQL Query 
     // Form Set Up
@@ -95,11 +97,17 @@ function Reviews() {
       .then(data => setUsers(data))
   }
   
+  const getRestaurants = () => {
+    fetch('http://localhost:5000/restaurants')
+      .then(response => response.json())
+      .then(data => setRestaurants(data))
+}
   useEffect(() => {
     getReviews()
     getUsers()
   }, [])
   
+
   // Return Data
     return (
         <div>
@@ -119,6 +127,7 @@ function Reviews() {
                 <TableCell>Rating</TableCell>
                 <TableCell>User Email</TableCell>
                 <TableCell>Date</TableCell>
+                <TableCell>Remove</TableCell>
             </TableRow>
             </TableHead>
             <TableBody>
@@ -143,9 +152,10 @@ function Reviews() {
             <br/>
             <label htmlFor="restaurantName">Restaurant Name</label>
                 <select id="restaurantName" name="restaurantName" onChange={onChangeRestaurantID}>
-                <option value="3">Hugos Cellar</option>
-                <option value="2">Cheesecake Factory</option>
-                <option value="1">Jjanga AYCE Sushi</option>
+                <option disabled selected value> -- select an option -- </option>
+                {restaurants.map((restaurant) => {
+                        return <option value={restaurant.restaurantID}>{restaurant.restaurantName}</option>
+                    })}
                 </select>
             <br/>
             <br/>
