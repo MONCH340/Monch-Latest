@@ -143,7 +143,7 @@ function Reviews() {
             <h2>Create a Review</h2>
             <label htmlFor="userEmail">User Email</label>
                 <select id="userEmail" name="userEmail" onChange={onChangeUserID} required>
-                    <option disabled selected value> -- select an option -- </option>
+                    <option disabled selected value="" > -- select an option -- </option>
                     {users.map((user) => {
                         return <option value={user.id}>{user.userEmail}</option>
                     })}
@@ -152,7 +152,7 @@ function Reviews() {
             <br/>
             <label htmlFor="restaurantName">Restaurant Name</label>
                 <select id="restaurantName" name="restaurantName" onChange={onChangeRestaurantID}>
-                <option disabled selected value> -- select an option -- </option>
+                <option disabled selected value=""> -- select an option -- </option>
                 {restaurants.map((restaurant) => {
                         return <option value={restaurant.restaurantID}>{restaurant.restaurantName}</option>
                     })}

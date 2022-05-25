@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import { sample_restaurants } from "../sample_data/restaurants"
 import { sample_coupons } from "../sample_data/coupons"
 import RestaurantRow from "../components/RestaurantRow"
 import RestaurantSelect from "../components/RestaurantSelect"
@@ -9,7 +8,7 @@ import { TableHead  } from '@mui/material';
 
 
 function Restaurants() {
-    const [restaurants, setRestaurants] = useState(sample_restaurants)
+    const [restaurants, setRestaurants] = useState([])
     const [coupons, setCoupons] = useState(sample_coupons)
 
     function deleteRestaurant (id) {
@@ -26,7 +25,7 @@ function Restaurants() {
         getRestaurants()
     }, [])
 
-    // Form Set Up
+    // Create Form Set Up
     const [restaurantName, setRestaurantName] = useState("")
     const [restaurantAddress, setRestaurantAddress] = useState("")
     const [restaurantCity, setRestaurantCity] = useState("")
@@ -78,6 +77,31 @@ function Restaurants() {
           .then(data => getRestaurants())
     }
 
+    // PUT Form Set Up
+    const [couponID, setCouponID] = useState("Null")
+    const [restaurantID, setRestaurantID] = useState()
+   
+    function onChangeCouponID(event) {
+        setCouponID(event.target.value)
+    }
+
+    function onChangeRestaurantID(event) {
+        setRestaurantID(event.target.value)
+    }
+
+    function addCoupon(event) {
+        event.preventDefault()
+        putRestaurant(restaurantID, couponID)
+    }
+
+    const putRestaurant = async (id, couponid) => {
+        fetch(`http://localhost:5000/restaurants/${id}/coupon/${couponid}`, {
+            method: 'PUT'
+        })
+        .then(response => response.json())
+        .then(data => getRestaurants())
+    }
+
     return (
         <div>
         <h1>Restaurant</h1>
@@ -115,16 +139,15 @@ function Restaurants() {
             <br/>
             <label htmlFor="restaurantPriceRange">Enter a price Range</label>
             <select required name="restaurantPriceRange" id="restaurantPriceRange" onChange={e => onChangeRestaurantPriceRange(e)}>
-                <option value="1">$0-$10</option>
-                <option value="2">$11-$20</option>
-                <option value="3">$20-$30</option>
-                <option value="4">$40-$50</option>
-                <option value="5">$50+</option>
+                <option value="1">$0-$15</option>
+                <option value="2">$16-$30</option>
+                <option value="3">$31-$50</option>
+                <option value="4">$51-$100</option>
+                <option value="5">$100+</option>
             </select>
             <br/>
             <label htmlFor="restaurantHasNutritionInfo">Does it have nutrition information</label>
             <select required name="restaurantHasNutritionInfo" id="restaurantHasNutritionInfo" onChange={e => onChangeRestaurantHasNutritionInfo(e)}>
-        
                 <option value="TRUE">TRUE</option>
                 <option value="FALSE">FALSE</option>
             </select>
@@ -134,19 +157,20 @@ function Restaurants() {
         <br/>
 
         <h2>Update Deals</h2>
-        <form>
+        <form onSubmit={addCoupon}>
         <label htmlFor="restaurantID">Select a Restaurant</label>
-        <select name="restaurantID" id="restaurantID">
-        {restaurants.map((restaurant) => {
-                return <RestaurantSelect data={restaurant} />
+        <select name="restaurantID" id="restaurantID" onChange={onChangeRestaurantID} required>
+            <option disabled selected value="" > -- select an option -- </option>
+            {restaurants.map((restaurant) => {
+                    return <RestaurantSelect data={restaurant} />
             })}
         </select>
         <br/>
         <label htmlFor='couponID'>Enter a deal</label>
-        <select name="couponID" id="couponID">
-        <option value="null">None (Null)</option>
-        {coupons.map((coupon) => {
-                return <CouponSelect data={coupon} />
+        <select name="couponID" id="couponID" onChange={onChangeCouponID} required>
+            <option value="NULL" > None (Null)</option>
+            {coupons.map((coupon) => {
+                    return <CouponSelect data={coupon} />
             })}
         </select>
         <button>Submit</button>

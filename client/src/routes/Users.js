@@ -6,7 +6,7 @@ import { TableHead } from '@mui/material';
 
 function Users() {
   // State Set Up
-  const [users, setUsers] = useState(sample_users)
+  const [users, setUsers] = useState([])
 
   // Form Set Up
   const [email, setEmail] = useState("")

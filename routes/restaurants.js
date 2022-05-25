@@ -38,6 +38,20 @@ router.post("/", async (req, res) => {
 });
 
 // Handles a put request 
+router.put("/:id/coupon/:couponid", async (req, res) => {
+  const {id, couponid} = req.params
+  let query_data = `UPDATE Restaurants SET couponID=${couponid} WHERE restaurantID=${id}`
+  try {
+    const results = await database.promise().query(query_data)
+    // Return all data in json format
+    res.status(201).send(results[0])
+  } catch (err) {
+    console.log(err)
+    res.status(400).send({
+      error: err.message
+    })
+  }
+});
 
 // Delete a user
 router.delete("/:id", async (req, res) => {
