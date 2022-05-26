@@ -12,7 +12,7 @@ import { TableHead } from "@mui/material";
 
 function Users() {
   // State Set Up
-  const [users, setUsers] = useState([{}]);
+  const [users, setUsers] = useState([]);
 
   // Form Set Up
   const [email, setEmail] = useState("");
@@ -33,7 +33,7 @@ function Users() {
 
   // API SET UP
   const getUsers = () => {
-    fetch("http://localhost:5000/users")
+    fetch("https://dry-bayou-57145.herokuapp.com/backend/users/")
       .then((response) => response.json())
       .then((data) => setUsers(data))
       .then(console.log("getUsers called"));
