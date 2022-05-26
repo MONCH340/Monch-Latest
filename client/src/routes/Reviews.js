@@ -65,7 +65,7 @@ function Reviews() {
     const [search, setSearch] = useState("")
 
     useEffect(() => {
-        fetch(`http://localhost:5000/reviews/${search}`)
+        fetch(`https://dry-bayou-57145.herokuapp.com/backend/reviews/${search}`)
         .then(response => response.json())
         .then(data => setReviews(data))
     }, [search])
@@ -73,8 +73,7 @@ function Reviews() {
 
     function searchReview(event) {
         event.preventDefault()
-        alert(`Searching for term: ${search}`)
-        fetch(`http://localhost:5000/reviews/${search}`)
+        fetch(`https://dry-bayou-57145.herokuapp.com/backend/reviews/${search}`)
         .then(response => response.json())
         .then(data => setReviews(data))
     }
@@ -86,19 +85,19 @@ function Reviews() {
   // API SET UP
   // https://dry-bayou-57145.herokuapp.com/reviews
   const getReviews = () => {
-    fetch('http://localhost:5000/reviews')
+    fetch('https://dry-bayou-57145.herokuapp.com/backend/reviews')
       .then(response => response.json())
       .then(data => setReviews(data))
   }
 
   const getUsers = () => {
-    fetch('http://localhost:5000/users')
+    fetch('https://dry-bayou-57145.herokuapp.com/backend/users')
       .then(response => response.json())
       .then(data => setUsers(data))
   }
   
   const getRestaurants = () => {
-    fetch('http://localhost:5000/restaurants')
+    fetch('https://dry-bayou-57145.herokuapp.com/backend/restaurants')
       .then(response => response.json())
       .then(data => setRestaurants(data))
 }

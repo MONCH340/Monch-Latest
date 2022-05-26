@@ -16,7 +16,7 @@ function Restaurants() {
     }
 
     const getRestaurants = () => {
-        fetch('http://localhost:5000/restaurants')
+        fetch('https://dry-bayou-57145.herokuapp.com/backend/restaurants')
           .then(response => response.json())
           .then(data => setRestaurants(data))
     }
@@ -66,7 +66,7 @@ function Restaurants() {
     }
 
     const postRestaurant = async (newRestaurant) => {
-        fetch("http://localhost:5000/restaurants", {
+        fetch("https://dry-bayou-57145.herokuapp.com/backend/restaurants", {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -95,7 +95,7 @@ function Restaurants() {
     }
 
     const putRestaurant = async (id, couponid) => {
-        fetch(`http://localhost:5000/restaurants/${id}/coupon/${couponid}`, {
+        fetch(`https://dry-bayou-57145.herokuapp.com/backend/restaurants/${id}/coupon/${couponid}`, {
             method: 'PUT'
         })
         .then(response => response.json())
