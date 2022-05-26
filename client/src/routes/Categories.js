@@ -46,7 +46,7 @@ function Categories() {
     setCategories(updatedCategories);
   }
   const postCategory = async (newCategory) => {
-    fetch(`http://localhost:5000/categories/`, {
+    fetch(`https://dry-bayou-57145.herokuapp.com/backend/categories/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
