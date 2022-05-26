@@ -43,6 +43,10 @@ app.use("/backend/reviews", reviews);
 app.use("/backend/categories", categories);
 app.use("/backend/restaurants", restaurants);
 
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
+
 // Port set up
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
