@@ -102,6 +102,7 @@ function Reviews() {
       .then(data => setRestaurants(data))
 }
   useEffect(() => {
+    getRestaurants()
     getReviews()
     getUsers()
   }, [])
