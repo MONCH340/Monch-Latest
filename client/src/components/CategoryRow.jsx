@@ -1,14 +1,23 @@
+import IconButton from "@mui/material/Button";
+import DeleteIcon from "@mui/icons-material/Delete";
+import TableRow from "@mui/material/TableRow";
+import TableCell from "@mui/material/TableCell";
+
 function CategoryRow(props) {
   return (
-    <tr id={props.data.categoryID}>
-      <td>{props.data.categoryID}</td>
-      <td>{props.data.categoryName}</td>
-      <td>
-        <button onClick={() => props.deleteCategories(props.data.categoryID)}>
-          Delete
-        </button>
-      </td>
-    </tr>
+    <TableRow id={props.data.categoryID}>
+      <TableCell>{props.data.categoryID}</TableCell>
+      <TableCell>{props.data.categoryName}</TableCell>
+      <TableCell>
+        <IconButton
+          aria-label="delete"
+          size="small"
+          onClick={() => props.deleteCategory(props.data.categoryID)}
+        >
+          <DeleteIcon />
+        </IconButton>
+      </TableCell>
+    </TableRow>
   );
 }
 
