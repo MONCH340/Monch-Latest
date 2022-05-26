@@ -25,14 +25,14 @@ function Categories() {
   }
 
   const getCategories = () => {
-    fetch("http://localhost:5000/categories")
+    fetch("https://dry-bayou-57145.herokuapp.com/backend/categories")
       .then((response) => response.json())
       .then((data) => setCategories(data))
       .then(console.log("getCategories called"));
   };
 
   const removeCategory = (id) =>
-    fetch(`http://localhost:5000/categories/${id}`, {
+    fetch(`https://dry-bayou-57145.herokuapp.com/backend/categories/${id}`, {
       method: "DELETE",
     });
 
