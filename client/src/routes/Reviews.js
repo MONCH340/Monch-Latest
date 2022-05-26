@@ -32,10 +32,12 @@ function Reviews() {
             reviewStar,
             reviewDate,
         }
-        console.log(newReview)
+        console.log("createReview")
+        postReview(newReview)
     }
 
     function onChangeUserID(event) {
+        console.log(event.target.value)
         setuserID(event.target.value)
     }
 
@@ -71,19 +73,10 @@ function Reviews() {
     }, [search])
 
 
-    function searchReview(event) {
-        event.preventDefault()
-        fetch(`https://dry-bayou-57145.herokuapp.com/backend/reviews/${search}`)
-        .then(response => response.json())
-        .then(data => setReviews(data))
-    }
-
     function onChangeSearch(event) {
         setSearch(event.target.value)
     }
 
-  // API SET UP
-  // https://dry-bayou-57145.herokuapp.com/reviews
   const getReviews = () => {
     fetch('https://dry-bayou-57145.herokuapp.com/backend/reviews')
       .then(response => response.json())
@@ -107,6 +100,17 @@ function Reviews() {
     getUsers()
   }, [])
   
+  const postReview = async (newReview) => {
+    fetch("https://dry-bayou-57145.herokuapp.com/backend/reviews", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newReview)
+      })
+      .then(response => response.json())
+      .then(data => getReviews())
+}
 
   // Return Data
     return (
@@ -145,7 +149,7 @@ function Reviews() {
                 <select id="userEmail" name="userEmail" onChange={onChangeUserID} required>
                     <option disabled selected value="" > -- select an option -- </option>
                     {users.map((user) => {
-                        return <option value={user.id}>{user.userEmail}</option>
+                        return <option value={user.userID}>{user.userEmail}</option>
                     })}
                 </select>
             <br/>
