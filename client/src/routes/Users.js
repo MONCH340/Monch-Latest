@@ -46,8 +46,8 @@ function Users() {
 
   const postUser = async (newUser) => {
     //'https://dry-bayou-57145.herokuapp.com/users
-    fetch("https://dry-bayou-57145.herokuapp.com/users/", {
-      method: "POST",
+    fetch("https://dry-bayou-57145.herokuapp.com/backend/users/", {
+      method: 'POST',
       headers: {
         "Content-Type": "application/json",
       },
@@ -61,7 +61,7 @@ function Users() {
 
   const removeUser = (id) =>
     //'https://dry-bayou-57145.herokuapp.com/users/id
-    fetch(`https://dry-bayou-57145.herokuapp.com/users/${id}`, {
+    fetch(`https://dry-bayou-57145.herokuapp.com/backend/users/${id}`, {
       method: "DELETE",
     });
 

@@ -38,10 +38,10 @@ app.get("/", (req, res) => {
   res.send("This is the home route");
 });
 
-app.use("/users", users);
-app.use("/reviews", reviews);
-app.use("/categories", categories);
-app.use("/restaurants", restaurants);
+app.use("/backend/users", users);
+app.use("/backend/reviews", reviews);
+app.use("/backend/categories", categories);
+app.use("/backend/restaurants", restaurants);
 
 // Port set up
 app.listen(port, () => {

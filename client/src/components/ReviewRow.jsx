@@ -12,7 +12,7 @@ function ReviewRow(props) {
       <TableCell>{props.data.reviewContent}</TableCell>
       <TableCell>{props.data.reviewStar}</TableCell>
       <TableCell>{props.data.userEmail}</TableCell>
-      <TableCell>{props.data.reviewDate}</TableCell>
+      <TableCell>{props.data.reviewDate.slice(0,10)}</TableCell>
       <TableCell>
       <IconButton  aria-label="delete" size="small"onClick={() => props.deleteReview(props.data.reviewID)}>
           <DeleteIcon />
