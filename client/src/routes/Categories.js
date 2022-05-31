@@ -13,8 +13,10 @@ import {
 import { TableHead } from "@mui/material";
 
 function Categories() {
+
   const [categories, setCategories] = useState([{}]);
   const [categoryName, setCategoryName] = useState("");
+
   useEffect(() => {
     console.log("IN EFFECT");
     getCategories();
@@ -45,12 +47,11 @@ function Categories() {
     );
     setCategories(updatedCategories);
   }
+
   const postCategory = async (newCategory) => {
     fetch(`https://dry-bayou-57145.herokuapp.com/backend/categories/`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: {"Content-Type": "application/json",},
       body: JSON.stringify(newCategory),
     })
       .then((response) => response.json())
