@@ -49,8 +49,9 @@ router.post("/", async (req, res) => {
     reviewStar,
     reviewDate,
   } = req.body
+  console.log(reviewDate)
   let query_data = `INSERT INTO Reviews (userID, restaurantID, reviewContent, reviewStar, reviewDate)\
-  VALUES (${userID}, ${restaurantID}, "${reviewContent}", ${reviewStar}, ${reviewDate})`
+  VALUES (${userID}, ${restaurantID}, "${reviewContent}", ${reviewStar}, "${reviewDate}")`
   try {
     const results = await database.promise().query(query_data)
     // Return all data in json format

@@ -105,27 +105,6 @@ function Restaurants() {
     return (
         <div>
         <h1>Restaurant</h1>
-        <TableContainer>
-        <Table>
-            <TableHead>
-            <TableRow>
-                <TableCell>ID</TableCell>
-                <TableCell>Restaurant</TableCell>
-                <TableCell>Address</TableCell>
-                <TableCell>City</TableCell>
-                <TableCell>Price Range</TableCell>
-                <TableCell>Has Nutrition Info</TableCell>
-                <TableCell>Deals</TableCell>
-            </TableRow>
-            </TableHead>
-            <TableBody>
-            {restaurants.map((restaurant) => {
-                return <RestaurantRow data={restaurant} deleteRestaurants={deleteRestaurant} />
-            })}
-            </TableBody>
-        </Table>
-        </TableContainer>
-        <br />
         <h2> Add a Restaurant</h2>
         <form onSubmit={createRestaurant}>
             <label htmlFor="restaurantName">Enter a restaurantName</label>
@@ -175,6 +154,27 @@ function Restaurants() {
         </select>
         <button>Submit</button>
         </form>
+        <TableContainer>
+        <Table>
+            <TableHead>
+            <TableRow>
+                <TableCell>ID</TableCell>
+                <TableCell>Restaurant</TableCell>
+                <TableCell>Address</TableCell>
+                <TableCell>City</TableCell>
+                <TableCell>Price Range</TableCell>
+                <TableCell>Has Nutrition Info</TableCell>
+                <TableCell>Deals</TableCell>
+            </TableRow>
+            </TableHead>
+            <TableBody>
+            {restaurants.map((restaurant) => {
+                return <RestaurantRow data={restaurant} deleteRestaurants={deleteRestaurant} />
+            })}
+            </TableBody>
+        </Table>
+        </TableContainer>
+        <br />
         </div>
     );
 }

@@ -36,11 +36,9 @@ function Users() {
     fetch("https://dry-bayou-57145.herokuapp.com/backend/users/")
       .then((response) => response.json())
       .then((data) => setUsers(data))
-      .then(console.log("getUsers called"));
   };
 
   useEffect(() => {
-    console.log("IN EFFECT");
     getUsers();
   }, []);
 
@@ -56,7 +54,6 @@ function Users() {
       .then((response) => response.json())
       .then(() => getUsers());
   };
-
 
 
   const removeUser = (id) =>
@@ -88,6 +85,37 @@ function Users() {
   return (
     <div>
       <h1>User</h1>
+      <form onSubmit={createUser}>
+        <h2>Create a new User</h2>
+        <label htmlFor="userEmail">Email:</label>
+        <input
+          type="email"
+          required
+          id="userEmail"
+          name="userEmail"
+          onChange={(e) => onChangeEmail(e)}
+        />
+        <br />
+        <label htmlFor="userBirthday">Enter a birthday:</label>
+        <input
+          type="date"
+          required
+          id="userBirthday"
+          name="userBirthday"
+          onChange={(e) => onChangeBirthday(e)}
+        />
+        <br />
+        <label htmlFor="userLocation">Enter a Location</label>
+        <input
+          type="text"
+          required
+          id="userLocation"
+          name="userLocation"
+          onChange={(e) => onChangeLocation(e)}
+        />
+        <br />
+        <input type="submit" value="Submit" />
+      </form>
       <TableContainer>
         <Table>
           <TableHead>
@@ -101,40 +129,11 @@ function Users() {
           </TableHead>
           <TableBody>
             {users.map((user) => {
-              console.log("Map function called!", user);
-              return <UserRow data={user} deleteUser={deleteUser} />;
+              return <UserRow data={user} deleteUser={deleteUser} key={user.userID}/>;
             })}
           </TableBody>
         </Table>
       </TableContainer>
-      <form onSubmit={createUser}>
-        <h2>Create a new User</h2>
-        <label htmlFor="userEmail">Email:</label>
-        <input
-          type="email"
-          id="userEmail"
-          name="userEmail"
-          onChange={(e) => onChangeEmail(e)}
-        />
-        <br />
-        <label htmlFor="userBirthday">Enter a birthday:</label>
-        <input
-          type="date"
-          id="userBirthday"
-          name="userBirthday"
-          onChange={(e) => onChangeBirthday(e)}
-        />
-        <br />
-        <label htmlFor="userLocation">Enter a Location</label>
-        <input
-          type="text"
-          id="userLocation"
-          name="userLocation"
-          onChange={(e) => onChangeLocation(e)}
-        />
-        <br />
-        <input type="submit" value="Submit" />
-      </form>
     </div>
   );
 }
