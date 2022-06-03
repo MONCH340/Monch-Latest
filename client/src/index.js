@@ -20,6 +20,7 @@ root.render(
       <Route path="categories" element={<Categories />} />
       <Route path="categories_restaurants" element={<Intersections />} />
       <Route path="coupons" element={<Coupons />} />
+
       <Route
       path="*"
       element={

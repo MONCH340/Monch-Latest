@@ -100,6 +100,7 @@ function Restaurants() {
         })
         .then(response => response.json())
         .then(data => getRestaurants())
+
     }
 
     return (

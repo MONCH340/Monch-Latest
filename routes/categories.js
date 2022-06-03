@@ -23,10 +23,11 @@ router.get("/", async (req, res) => {
 // Delete a category
 router.delete("/:id", async (req, res) => {
   console.log(req);
-  const { id } = req.params;
+  const { id } = req.params; // object destructuring
   let query_data = `DELETE FROM categories WHERE categoryid = ${id}`;
   try {
     const results = await database.promise().query(query_data);
+
     if (results[0].affectedRows == 0) {
       console.log("no results");
       res.status(400).send({});

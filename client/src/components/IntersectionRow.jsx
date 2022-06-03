@@ -2,8 +2,8 @@ function IntersectionRow(props) {
   return (
     <tr id={props.data.restaurantsWithCategoriesID}>
       <td>{props.data.restaurantsWithCategoriesID}</td>
-      <td>{props.data.category}</td>
-      <td>{props.data.restaurant}</td>
+      <td>{props.data.categoryName}</td>
+      <td>{props.data.restaurantName}</td>
       <td>
         <button
           onClick={() =>
