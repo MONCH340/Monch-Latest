@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
-import NavBar from "../components/NavBar";
-import { sample_intersections } from "../sample_data/intersections";
 import IntersectionRow from "../components/IntersectionRow";
-import { sample_categories } from "../sample_data/categories";
-import { sample_restaurants } from "../sample_data/restaurants";
-// import { useEffect } from "@types/react";
+import RestaurantSelect from "../components/RestaurantSelect";
 
 function Intersections() {
   const [intersections, setIntersection] = useState([{}]);
-  const [restaurants, setRestaurants] = useState(sample_restaurants);
-  const [categories, setCategories] = useState(sample_categories);
+  const [restaurants, setRestaurants] = useState([{}]);
+  // const [category, setCategoryID] = useState([{}]);
+  const [restaurantID, setRestaurantID] = useState([{}]);
+
   useEffect(() => {
     console.log("IN EFFECT");
     readIntersections();
+    readRestaurants();
   }, []);
 
   function readIntersections() {
@@ -21,6 +20,8 @@ function Intersections() {
       .then((data) => setIntersection(data));
     console.log("setIntersections called");
   }
+
+
   function deleteIntersection(id) {
     fetch(`http://localhost:5000/backend/intersections/${id}`, {
       method: "DELETE",
@@ -31,6 +32,22 @@ function Intersections() {
     );
     setIntersection(updatedIntersections);
   }
+
+  const readRestaurants = () => {
+    fetch("https://dry-bayou-57145.herokuapp.com/backend/restaurants")
+        .then((response) => response.json())
+        .then((data) => setRestaurants(data));
+  };
+
+  function onChangeRestaurantID(event) {
+    setRestaurantID(event.target.value);
+  }
+
+  // function onChangeCategoryID(event) {
+  //   setCategoryID(event.target);
+  // }
+
+
 
   return (
     <div>
@@ -53,28 +70,32 @@ function Intersections() {
       </table>
 
       <form>
-        <h2>Attach a new categories to an existing Restaurant</h2>
-        <label htmlFor="restaurant">Restaurant</label>
-        <select name="restaurant" id="restaurant">
+        <label htmlFor="restaurantID">Select a Restaurant</label>
+        <select
+          name="restaurantID"
+          id="restaurantID"
+          onChange={onChangeRestaurantID}
+          required
+        >
+          <option disabled selected value="">
+            {" "}
+            -- select an option --{" "}
+          </option>
           {restaurants.map((restaurant) => {
-            return (
-              <option value={restaurant.restaurantID}>
-                {restaurant.restaurantName}
-              </option>
-            );
+            return <RestaurantSelect data={restaurant} />;
           })}
         </select>
         <br />
-        <label htmlFor="category">Category</label>
-        <select name="category" id="category">
-          {categories.map((category) => {
-            return (
-              <option value={category.categoryID}>
-                {category.categoryName}
-              </option>
-            );
-          })}
-        </select>
+        <label htmlFor="categoryID">Category</label>
+        {/*<select name="categoryID" id="categoryID" onChange={onChangeCategoryID}>*/}
+        {/*  {category.map((category1) => {*/}
+        {/*    return (*/}
+        {/*      <option value={category1.categoryID}>*/}
+        {/*        {category1.categoryName}*/}
+        {/*      </option>*/}
+        {/*    );*/}
+        {/*  })}*/}
+        {/*</select>*/}
         <br />
         <button>Submit</button>
       </form>
