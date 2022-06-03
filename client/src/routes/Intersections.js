@@ -3,24 +3,25 @@ import IntersectionRow from "../components/IntersectionRow";
 import RestaurantSelect from "../components/RestaurantSelect";
 
 function Intersections() {
-  const [intersections, setIntersection] = useState([{}]);
+  const [intersections, setIntersections] = useState([{}]);
   const [restaurants, setRestaurants] = useState([{}]);
-  // const [category, setCategoryID] = useState([{}]);
   const [restaurantID, setRestaurantID] = useState([{}]);
+  const [categories, setCategories] = useState([{}]);
+  const [categoryID, setCategoryID] = useState([{}]);
 
   useEffect(() => {
     console.log("IN EFFECT");
     readIntersections();
     readRestaurants();
+    readCategories();
   }, []);
 
   function readIntersections() {
     fetch(`http://localhost:5000/backend/intersections`)
       .then((response) => response.json())
-      .then((data) => setIntersection(data));
+      .then((data) => setIntersections(data));
     console.log("setIntersections called");
   }
-
 
   function deleteIntersection(id) {
     fetch(`http://localhost:5000/backend/intersections/${id}`, {
@@ -30,25 +31,67 @@ function Intersections() {
     let updatedIntersections = allIntersections.filter(
       (intersection) => intersection.restaurantsWithCategoriesID !== id
     );
-    setIntersection(updatedIntersections);
+    setIntersections(updatedIntersections);
   }
 
-  const readRestaurants = () => {
+  function readRestaurants() {
     fetch("https://dry-bayou-57145.herokuapp.com/backend/restaurants")
-        .then((response) => response.json())
-        .then((data) => setRestaurants(data));
-  };
+      .then((response) => response.json())
+      .then((data) => setRestaurants(data));
+  }
+
+  function readCategories() {
+    fetch("https://dry-bayou-57145.herokuapp.com/backend/categories")
+      .then((response) => response.json())
+      .then((data) => setCategories(data))
+      .then(() => console.log("readCategories called"));
+  }
 
   function onChangeRestaurantID(event) {
     setRestaurantID(event.target.value);
   }
 
-  // function onChangeCategoryID(event) {
-  //   setCategoryID(event.target);
-  // }
+  function onChangeCategoryID(event) {
+    setCategoryID(event.target.value);
+  }
+
+  function editIntersection(event) {
+    event.preventDefault();
+    async function putIntersection(categoryID, restaurantID) {
+      fetch(
+          `http://localhost:5000/backend/intersections/category/${categoryID}/restaurant/${restaurantID}`,
+          {
+            method: "PUT",
+          }
+      ).then((response) => response.json());
+      readIntersections();
+    }
+    putIntersection(categoryID, restaurantID).then(() =>
+      console.log("Edited intersection!")
+    );
+  }
+
+function createIntersection(event){
+  async function postIntersection(newIntersection) {
+    fetch(`http://localhost:5000/backend/intersections`, {
+      method: "POST",
+      headers: {
+        "Content-Type": `application/json`,
+      },
+      body: JSON.stringify(newIntersection),
+    }).then((response) => response.json())
+    .then(() => readIntersections())
+  }
+
+    event.preventDefault()
+    let newIntersection= {
+    categoryID,
+    restaurantID
+    }
+    postIntersection(newIntersection)
 
 
-
+  }
   return (
     <div>
       <h1>Restaurants with Categories</h1>
@@ -69,7 +112,9 @@ function Intersections() {
         })}
       </table>
 
-      <form>
+      <h2>Associate category to an existing restaurant </h2>
+
+      <form onSubmit={createIntersection}>
         <label htmlFor="restaurantID">Select a Restaurant</label>
         <select
           name="restaurantID"
@@ -79,23 +124,34 @@ function Intersections() {
         >
           <option disabled selected value="">
             {" "}
-            -- select an option --{" "}
+            — Select an Option —{" "}
           </option>
           {restaurants.map((restaurant) => {
             return <RestaurantSelect data={restaurant} />;
           })}
         </select>
         <br />
+        <br />
         <label htmlFor="categoryID">Category</label>
-        {/*<select name="categoryID" id="categoryID" onChange={onChangeCategoryID}>*/}
-        {/*  {category.map((category1) => {*/}
-        {/*    return (*/}
-        {/*      <option value={category1.categoryID}>*/}
-        {/*        {category1.categoryName}*/}
-        {/*      </option>*/}
-        {/*    );*/}
-        {/*  })}*/}
-        {/*</select>*/}
+        <select
+          name="categoryID"
+          id="categoryID"
+          onChange={onChangeCategoryID}
+          required
+        >
+          <option disabled selected value="">
+            {" "}
+            — Select an Option —{" "}
+          </option>
+          {categories.map((category) => {
+            return (
+              <option value={category.categoryID}>
+                {category.categoryName}
+              </option>
+            );
+          })}
+        </select>
+        <br />
         <br />
         <button>Submit</button>
       </form>
@@ -103,3 +159,7 @@ function Intersections() {
   );
 }
 export default Intersections;
+
+
+
+// https://stackoverflow.com/questions/57136858/efficient-way-to-check-if-composite-key-exists-before-inserting
