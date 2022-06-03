@@ -31,6 +31,7 @@ const reviews = require("./routes/reviews");
 const categories = require("./routes/categories");
 const restaurants = require("./routes/restaurants");
 const coupons = require("./routes/coupons");
+const intersections = require("./routes/intersections")
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
@@ -44,6 +45,7 @@ app.use("/backend/reviews", reviews);
 app.use("/backend/categories", categories);
 app.use("/backend/restaurants", restaurants);
 app.use("/backend/coupons", coupons);
+app.use("/backend/intersections", intersections);
 
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));

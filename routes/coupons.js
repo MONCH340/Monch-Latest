@@ -37,22 +37,21 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req,res) => {
-  let {couponDetails} = req.body;
+router.post("/", async (req, res) => {
+  let { couponDetails } = req.body;
   let query = `INSERT INTO coupons (couponDetails) VALUES ("${couponDetails}")`;
-  try{
-    const results = await db.promise().query(query)
-    let newID = results[0].insertId
+  try {
+    const results = await db.promise().query(query);
+    let newID = results[0].insertId;
     res.status(201).send({
       couponID: newID,
       couponDetails,
-    })
-  } catch(err){
-    console.log(err)
+    });
+  } catch (err) {
+    console.log(err);
     res.stats(400).send({
       error: err.message,
-    })
-
+    });
   }
-})
+});
 module.exports = router;
