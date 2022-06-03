@@ -161,5 +161,5 @@ function createIntersection(event){
 export default Intersections;
 
 
-
+// Problem: we can make multiple of the same composite key combinations -- solution might be here:
 // https://stackoverflow.com/questions/57136858/efficient-way-to-check-if-composite-key-exists-before-inserting
