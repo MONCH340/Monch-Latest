@@ -55,42 +55,41 @@ function Intersections() {
     setCategoryID(event.target.value);
   }
 
-  function editIntersection(event) {
+  // function editIntersection(event) {
+  //   event.preventDefault();
+  //   async function putIntersection(categoryID, restaurantID) {
+  //     fetch(
+  //         `http://localhost:5000/backend/intersections/category/${categoryID}/restaurant/${restaurantID}`,
+  //         {
+  //           method: "PUT",
+  //         }
+  //     ).then((response) => response.json());
+  //     readIntersections();
+  //   }
+  //   putIntersection(categoryID, restaurantID).then(() =>
+  //     console.log("Edited intersection!")
+  //   );
+  // }
+
+  function createIntersection(event) {
+    async function postIntersection(newIntersection) {
+      fetch(`http://localhost:5000/backend/intersections`, {
+        method: "POST",
+        headers: {
+          "Content-Type": `application/json`,
+        },
+        body: JSON.stringify(newIntersection),
+      })
+        .then((response) => response.json())
+        .then(() => readIntersections());
+    }
+
     event.preventDefault();
-    async function putIntersection(categoryID, restaurantID) {
-      fetch(
-          `http://localhost:5000/backend/intersections/category/${categoryID}/restaurant/${restaurantID}`,
-          {
-            method: "PUT",
-          }
-      ).then((response) => response.json());
-      readIntersections();
-    }
-    putIntersection(categoryID, restaurantID).then(() =>
-      console.log("Edited intersection!")
-    );
-  }
-
-function createIntersection(event){
-  async function postIntersection(newIntersection) {
-    fetch(`http://localhost:5000/backend/intersections`, {
-      method: "POST",
-      headers: {
-        "Content-Type": `application/json`,
-      },
-      body: JSON.stringify(newIntersection),
-    }).then((response) => response.json())
-    .then(() => readIntersections())
-  }
-
-    event.preventDefault()
-    let newIntersection= {
-    categoryID,
-    restaurantID
-    }
-    postIntersection(newIntersection)
-
-
+    let newIntersection = {
+      categoryID,
+      restaurantID,
+    };
+    postIntersection(newIntersection).then(() => "POSTing new intersection");
   }
   return (
     <div>
@@ -113,7 +112,7 @@ function createIntersection(event){
       </table>
 
       <h2>Associate category to an existing restaurant </h2>
-
+      <p>* Restaurants can have multiple categories, and categories can have multiple restaurants</p>
       <form onSubmit={createIntersection}>
         <label htmlFor="restaurantID">Select a Restaurant</label>
         <select
@@ -159,7 +158,6 @@ function createIntersection(event){
   );
 }
 export default Intersections;
-
 
 // Problem: we can make multiple of the same composite key combinations -- solution might be here:
 // https://stackoverflow.com/questions/57136858/efficient-way-to-check-if-composite-key-exists-before-inserting

@@ -60,7 +60,7 @@ router.delete("/:id", async (req, res) => {
   try {
     const results = await database.promise().query(query_data)
     // no rows were deleted - need better handlers
-    if (results[0].affectedRows == 0) {
+    if (results[0].affectedRows === 0) {
       res.status(201).send({
         userID: 10000
       })
