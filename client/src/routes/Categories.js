@@ -19,18 +19,18 @@ function Categories() {
 
   useEffect(() => {
     console.log("IN EFFECT");
-    getCategories();
+    readCategories();
   }, []);
 
   function onChangeCategory(event) {
     setCategoryName(event.target.value);
   }
 
-  const getCategories = () => {
+  const readCategories = () => {
     fetch("https://dry-bayou-57145.herokuapp.com/backend/categories")
       .then((response) => response.json())
       .then((data) => setCategories(data))
-      .then(console.log("getCategories called"));
+      .then(()=> console.log("readCategories called"));
   };
 
   const removeCategory = (id) =>
@@ -55,7 +55,7 @@ function Categories() {
       body: JSON.stringify(newCategory),
     })
       .then((response) => response.json())
-      .then(() => getCategories());
+      .then(() => readCategories());
   };
 
   function createCategory(event) {

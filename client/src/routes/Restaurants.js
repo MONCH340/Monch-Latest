@@ -45,6 +45,8 @@ function Restaurants() {
 
     function onChangeRestaurantAddress(event) {
         setRestaurantAddress(event.target.value)
+    }    function onChangeRestaurantID(event) {
+        setRestaurantID(event.target.value)
     }
 
     function onChangeRestaurantCity(event) {
@@ -146,6 +148,7 @@ function Restaurants() {
         <h2>Update Deals</h2>
         <form onSubmit={addCoupon}>
         <label htmlFor="restaurantID">Select a Restaurant</label>
+
         <select name="restaurantID" id="restaurantID" onChange={onChangeRestaurantID} required>
             <option disabled selected value="" > -- select an option -- </option>
             {restaurants.map((restaurant) => {

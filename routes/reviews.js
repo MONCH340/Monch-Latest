@@ -1,6 +1,6 @@
-var express = require("express");
-var router = express.Router();
-var database = require('../database')
+const express = require("express");
+const router = express.Router();
+const database = require('../database');
 
 /// Routes for Review Page
 
@@ -71,7 +71,7 @@ router.delete("/:id", async (req, res) => {
   try {
     const results = await database.promise().query(query_data)
     // no rows were deleted - need better handlers
-    if (results[0].affectedRows == 0) {
+    if (results[0].affectedRows === 0) {
       res.status(201).send({
         userID: 10000
       })
