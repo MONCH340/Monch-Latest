@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
 import IntersectionRow from "../components/IntersectionRow";
 import RestaurantSelect from "../components/RestaurantSelect";
+import {
+  Table,
+  TableCell,
+  TableRow,
+  TableBody,
+  TableHead,
+  TableContainer,
+  TextField,
+} from "@mui/material/";
 
 function Intersections() {
   const [intersections, setIntersections] = useState([{}]);
@@ -78,25 +87,8 @@ function Intersections() {
   }
   return (
     <div>
-      <h1>Restaurants with Categories</h1>
-      <h2>Restaurants with Categories Table</h2>
-      <table>
-        <tr>
-          <th>ID</th>
-          <th>Category</th>
-          <th>Restaurant Name</th>
-        </tr>
-        {intersections.map((intersection) => {
-          return (
-            <IntersectionRow
-              data={intersection}
-              deleteIntersection={deleteIntersection}
-            />
-          );
-        })}
-      </table>
-
-      <h2>Associate category to an existing restaurant </h2>
+    <h1>Restaurants with Categories</h1>
+    <h2>Associate category to an existing restaurant </h2>
       <p>* Restaurants can have multiple categories, and categories can have multiple restaurants</p>
       <form onSubmit={createIntersection}>
         <label htmlFor="restaurantID">Select a Restaurant</label>
@@ -139,6 +131,28 @@ function Intersections() {
         <br />
         <button>Submit</button>
       </form>
+    
+      <h2>Restaurants with Categories Table</h2>
+      <TableContainer>
+      <Table>
+        <TableHead>
+        <TableRow>
+          <TableCell>ID</TableCell>
+          <TableCell>Category</TableCell>
+          <TableCell>Restaurant Name</TableCell>
+          <TableCell>Remove</TableCell>
+        </TableRow>
+        </TableHead>
+        {intersections.map((intersection) => {
+          return (
+            <IntersectionRow
+              data={intersection}
+              deleteIntersection={deleteIntersection}
+            />
+          );
+        })}
+      </Table>
+      </TableContainer>
     </div>
   );
 }

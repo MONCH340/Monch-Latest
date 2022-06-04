@@ -1,19 +1,20 @@
+import IconButton from "@mui/material/Button";
+import DeleteIcon from "@mui/icons-material/Delete";
+import TableRow from "@mui/material/TableRow";
+import TableCell from "@mui/material/TableCell";
+
 function IntersectionRow(props) {
   return (
-    <tr id={props.data.restaurantsWithCategoriesID}>
-      <td>{props.data.restaurantsWithCategoriesID}</td>
-      <td>{props.data.categoryName}</td>
-      <td>{props.data.restaurantName}</td>
-      <td>
-        <button
-          onClick={() =>
-            props.deleteIntersection(props.data.restaurantsWithCategoriesID)
-          }
-        >
-          Delete
-        </button>
-      </td>
-    </tr>
+    <TableRow id={props.data.restaurantsWithCategoriesID}>
+      <TableCell>{props.data.restaurantsWithCategoriesID}</TableCell>
+      <TableCell>{props.data.categoryName}</TableCell>
+      <TableCell>{props.data.restaurantName}</TableCell>
+      <TableCell >
+        <IconButton  aria-label="delete" size="small" onClick={() => props.deleteIntersection(props.data.restaurantsWithCategoriesID)}>
+          <DeleteIcon />
+        </IconButton>
+      </TableCell>
+    </TableRow>
   );
 }
 

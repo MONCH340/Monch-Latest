@@ -56,7 +56,7 @@ router.put("/:id/coupon/:couponid", async (req, res) => {
 // Delete a user
 router.delete("/:id", async (req, res) => {
   const { id } = req.params
-  let query_data = `DELETE FROM restaurants WHERE restaurantsid = ${id}`;
+  let query_data = `DELETE FROM restaurants WHERE restaurantID = ${id}`;
   try {
     const results = await database.promise().query(query_data)
     // no rows were deleted - need better handlers

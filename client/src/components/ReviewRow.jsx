@@ -2,7 +2,7 @@ import IconButton  from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
-
+import Rating from "@mui/material/Rating"
 
 function ReviewRow(props) {
   return (
@@ -10,7 +10,9 @@ function ReviewRow(props) {
       <TableCell>{props.data.reviewID}</TableCell>
       <TableCell>{props.data.restaurantName}</TableCell>
       <TableCell>{props.data.reviewContent}</TableCell>
-      <TableCell>{props.data.reviewStar}</TableCell>
+      <TableCell>
+      <Rating name="half-rating-read" defaultValue={props.data.reviewStar}  readOnly />
+      </TableCell>
       <TableCell>{props.data.userEmail}</TableCell>
       <TableCell>{props.data.reviewDate.slice(0,10)}</TableCell>
       <TableCell>

@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import NavBar from "../components/NavBar";
-import { sample_categories } from "../sample_data/categories";
 import CategoryRow from "../components/CategoryRow";
 import {
   Table,
@@ -69,18 +67,8 @@ function Categories() {
   return (
     <div>
       <h1>Category</h1>
-      <table>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-        </tr>
-        {categories.map((category) => {
-          return (
-            <CategoryRow data={category} deleteCategory={deleteCategory} />
-          );
-        })}
-      </table>
 
+      
       <form onSubmit={createCategory}>
         <h2>Create a Category</h2>
         <label htmlFor="categoryName"> Enter a Category name:</label>
@@ -93,6 +81,24 @@ function Categories() {
         <br />
         <input type="submit" value="Create" />
       </form>
+      <br />
+      <TableContainer>
+      <Table>
+      <TableHead>
+        <TableRow>
+          <TableCell>ID</TableCell>
+          <TableCell>Name</TableCell>
+          <TableCell>Remove</TableCell>
+        </TableRow>
+        </TableHead>
+        {categories.map((category) => {
+          return (
+            <CategoryRow data={category} deleteCategory={deleteCategory} />
+          );
+        })}
+      </Table>
+      </TableContainer>
+
     </div>
   );
 }

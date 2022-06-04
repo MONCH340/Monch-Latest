@@ -4,15 +4,15 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell"
 function CouponRow(props) {
   return (
-    <tr id={props.data.couponID}>
-      <td>{props.data.couponID}</td>
-      <td>{props.data.couponDetails}</td>
-      <td>
-        <button onClick={() => props.deleteCoupons(props.data.couponID)}>
-          Delete
-        </button>
-      </td>
-    </tr>
+    <TableRow id={props.data.couponID}>
+      <TableCell>{props.data.couponID}</TableCell>
+      <TableCell>{props.data.couponDetails}</TableCell>
+      <TableCell >
+      <IconButton  aria-label="delete" size="small" onClick={() => props.deleteCoupons(props.data.couponID)}>
+          <DeleteIcon />
+        </IconButton>
+      </TableCell>
+    </TableRow>
   );
 }
 export default CouponRow;

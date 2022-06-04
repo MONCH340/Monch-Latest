@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from "react";
 import CouponRow from "../components/CouponRow";
+import {
+  Table,
+  TableCell,
+  TableRow,
+  TableBody,
+  TableContainer,
+  TableHead,
+  TextField,
+} from "@mui/material/";
 
 function Coupons() {
   const [coupons, setCoupons] = useState([{}]);
@@ -48,18 +57,7 @@ function Coupons() {
   return (
     <div>
       <h1>Coupon</h1>
-      <h2>Coupon Table</h2>
-      <table>
-        <tr>
-          <th>ID</th>
-          <th>Details</th>
-        </tr>
-        <tr>
-          {coupons.map((coupon) => {
-            return <CouponRow data={coupon} deleteCoupons={deleteCoupon} />;
-          })}
-        </tr>
-      </table>
+      
       <form onSubmit={createCoupon}>
         <h2> Add a known Coupon</h2>
         <label>Enter Coupon Details</label>
@@ -73,6 +71,24 @@ function Coupons() {
         <br />
         <button>Submit</button>
       </form>
+
+    
+      <h2>Coupon Table</h2>
+      <Table>
+        <TableHead>
+        <TableRow>
+          <TableCell>ID</TableCell>
+          <TableCell>Details</TableCell>
+          <TableCell>Remove</TableCell>
+        </TableRow>
+        </TableHead>
+        <TableBody>
+          {coupons.map((coupon) => {
+            return <CouponRow data={coupon} deleteCoupons={deleteCoupon} key={coupon.couponID}/>;
+          })}
+        </TableBody>
+      </Table>
+    
     </div>
   );
 }

@@ -1,18 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import { sample_users } from "../sample_data/users"
 import ReviewRow from "../components/ReviewRow"
 import Button from '@mui/material/Button';
-import { sample_reviews } from '../sample_data/reviews';
 import {Table, TableCell, TableRow, TableBody, TableContainer, TextField } from '@mui/material/';
 import { TableHead  } from '@mui/material';
-import { sample_restaurants } from '../sample_data/restaurants';
 
 
 function Reviews() {
     // State Set Up
-    const [reviews, setReviews] = useState(sample_reviews)
-    const [users, setUsers] = useState(sample_users)
-    const [restaurants, setRestaurants] = useState(sample_restaurants)
+    const [reviews, setReviews] = useState([])
+    const [users, setUsers] = useState([])
+    const [restaurants, setRestaurants] = useState([])
 
     
     // Add SQL Query 
@@ -58,10 +55,16 @@ function Reviews() {
     }
 
 
-    // Add SQL Delete
+    // SQL Delete
     function deleteReview(id) {
-        alert(`Deleting Review ${id}`)
+        removeReview(id)
     }
+
+    const removeReview = (id) =>
+    fetch(`https://dry-bayou-57145.herokuapp.com/backend/reviews/${id}`, {
+      method: "DELETE",
+    }).then((response) => response.json())
+    .then(() => getReviews());
 
     // Search SQL
     const [search, setSearch] = useState("")

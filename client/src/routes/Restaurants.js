@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import { sample_coupons } from "../sample_data/coupons"
 import RestaurantRow from "../components/RestaurantRow"
 import RestaurantSelect from "../components/RestaurantSelect"
 import CouponSelect from "../components/CouponSelect"
@@ -12,8 +11,16 @@ function Restaurants() {
     const [coupons, setCoupons] = useState([])
 
     function deleteRestaurant (id) {
-        alert(`Deleting ${id}`)
+        removeRestaurant(id)
     }
+
+    const removeRestaurant = (id) =>
+    //'https://dry-bayou-57145.herokuapp.com/users/id
+    fetch(`https://dry-bayou-57145.herokuapp.com/backend/restaurants/${id}`, {
+      method: "DELETE",
+    }).then((response) => response.json())
+    .then(() => getRestaurants());
+
 
     const getRestaurants = () => {
         fetch('https://dry-bayou-57145.herokuapp.com/backend/restaurants')
@@ -45,7 +52,9 @@ function Restaurants() {
 
     function onChangeRestaurantAddress(event) {
         setRestaurantAddress(event.target.value)
-    }    function onChangeRestaurantID(event) {
+    }    
+    
+    function onChangeRestaurantID(event) {
         setRestaurantID(event.target.value)
     }
 
@@ -176,6 +185,7 @@ function Restaurants() {
                 <TableCell>Price Range</TableCell>
                 <TableCell>Has Nutrition Info</TableCell>
                 <TableCell>Deals</TableCell>
+                <TableCell>Remove</TableCell>
             </TableRow>
             </TableHead>
             <TableBody>
