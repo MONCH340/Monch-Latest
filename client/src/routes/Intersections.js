@@ -1,26 +1,28 @@
 import React, { useState, useEffect } from "react";
-import NavBar from "../components/NavBar";
-import { sample_intersections } from "../sample_data/intersections";
 import IntersectionRow from "../components/IntersectionRow";
-import { sample_categories } from "../sample_data/categories";
-import { sample_restaurants } from "../sample_data/restaurants";
-// import { useEffect } from "@types/react";
+import RestaurantSelect from "../components/RestaurantSelect";
 
 function Intersections() {
-  const [intersections, setIntersection] = useState([{}]);
-  const [restaurants, setRestaurants] = useState(sample_restaurants);
-  const [categories, setCategories] = useState(sample_categories);
+  const [intersections, setIntersections] = useState([{}]);
+  const [restaurants, setRestaurants] = useState([{}]);
+  const [restaurantID, setRestaurantID] = useState([{}]);
+  const [categories, setCategories] = useState([{}]);
+  const [categoryID, setCategoryID] = useState([{}]);
+
   useEffect(() => {
     console.log("IN EFFECT");
     readIntersections();
+    readRestaurants();
+    readCategories();
   }, []);
 
   function readIntersections() {
     fetch(`http://localhost:5000/backend/intersections`)
       .then((response) => response.json())
-      .then((data) => setIntersection(data));
+      .then((data) => setIntersections(data));
     console.log("setIntersections called");
   }
+
   function deleteIntersection(id) {
     fetch(`http://localhost:5000/backend/intersections/${id}`, {
       method: "DELETE",
@@ -29,9 +31,66 @@ function Intersections() {
     let updatedIntersections = allIntersections.filter(
       (intersection) => intersection.restaurantsWithCategoriesID !== id
     );
-    setIntersection(updatedIntersections);
+    setIntersections(updatedIntersections);
   }
 
+  function readRestaurants() {
+    fetch("https://dry-bayou-57145.herokuapp.com/backend/restaurants")
+      .then((response) => response.json())
+      .then((data) => setRestaurants(data));
+  }
+
+  function readCategories() {
+    fetch("https://dry-bayou-57145.herokuapp.com/backend/categories")
+      .then((response) => response.json())
+      .then((data) => setCategories(data))
+      .then(() => console.log("readCategories called"));
+  }
+
+  function onChangeRestaurantID(event) {
+    setRestaurantID(event.target.value);
+  }
+
+  function onChangeCategoryID(event) {
+    setCategoryID(event.target.value);
+  }
+
+  // function editIntersection(event) {
+  //   event.preventDefault();
+  //   async function putIntersection(categoryID, restaurantID) {
+  //     fetch(
+  //         `http://localhost:5000/backend/intersections/category/${categoryID}/restaurant/${restaurantID}`,
+  //         {
+  //           method: "PUT",
+  //         }
+  //     ).then((response) => response.json());
+  //     readIntersections();
+  //   }
+  //   putIntersection(categoryID, restaurantID).then(() =>
+  //     console.log("Edited intersection!")
+  //   );
+  // }
+
+  function createIntersection(event) {
+    async function postIntersection(newIntersection) {
+      fetch(`http://localhost:5000/backend/intersections`, {
+        method: "POST",
+        headers: {
+          "Content-Type": `application/json`,
+        },
+        body: JSON.stringify(newIntersection),
+      })
+        .then((response) => response.json())
+        .then(() => readIntersections());
+    }
+
+    event.preventDefault();
+    let newIntersection = {
+      categoryID,
+      restaurantID,
+    };
+    postIntersection(newIntersection).then(() => "POSTing new intersection");
+  }
   return (
     <div>
       <h1>Restaurants with Categories</h1>
@@ -52,21 +111,37 @@ function Intersections() {
         })}
       </table>
 
-      <form>
-        <h2>Attach a new categories to an existing Restaurant</h2>
-        <label htmlFor="restaurant">Restaurant</label>
-        <select name="restaurant" id="restaurant">
+      <h2>Associate category to an existing restaurant </h2>
+      <p>* Restaurants can have multiple categories, and categories can have multiple restaurants</p>
+      <form onSubmit={createIntersection}>
+        <label htmlFor="restaurantID">Select a Restaurant</label>
+        <select
+          name="restaurantID"
+          id="restaurantID"
+          onChange={onChangeRestaurantID}
+          required
+        >
+          <option disabled selected value="">
+            {" "}
+            — Select an Option —{" "}
+          </option>
           {restaurants.map((restaurant) => {
-            return (
-              <option value={restaurant.restaurantID}>
-                {restaurant.restaurantName}
-              </option>
-            );
+            return <RestaurantSelect data={restaurant} />;
           })}
         </select>
         <br />
-        <label htmlFor="category">Category</label>
-        <select name="category" id="category">
+        <br />
+        <label htmlFor="categoryID">Category</label>
+        <select
+          name="categoryID"
+          id="categoryID"
+          onChange={onChangeCategoryID}
+          required
+        >
+          <option disabled selected value="">
+            {" "}
+            — Select an Option —{" "}
+          </option>
           {categories.map((category) => {
             return (
               <option value={category.categoryID}>
@@ -76,9 +151,13 @@ function Intersections() {
           })}
         </select>
         <br />
+        <br />
         <button>Submit</button>
       </form>
     </div>
   );
 }
 export default Intersections;
+
+// Problem: we can make multiple of the same composite key combinations -- solution might be here:
+// https://stackoverflow.com/questions/57136858/efficient-way-to-check-if-composite-key-exists-before-inserting

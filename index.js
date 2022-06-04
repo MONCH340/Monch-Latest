@@ -35,6 +35,7 @@ const intersections = require("./routes/intersections")
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
+//
 
 app.get("/", (req, res) => {
   res.send("This is the home route");

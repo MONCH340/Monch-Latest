@@ -99,6 +99,7 @@ CREATE TABLE IF NOT EXISTS RestaurantsWithCategories
     Primary Key (restaurantsWithCategoriesID),
     FOREIGN KEY (restaurantID) REFERENCES Restaurants (restaurantID) ON DELETE CASCADE,
     FOREIGN KEY (categoryID) REFERENCES Categories (categoryID) ON DELETE CASCADE
+
 );
 -- Dumping data for table `RestaurantsWithCategories`
 INSERT INTO RestaurantsWithCategories (`restaurantID`, `categoryID`)
@@ -106,3 +107,5 @@ VALUES (1, 1),
        (1, 3),
        (2, 1),
        (3, 4);
+-- Add constraints --
+ALTER TABLE restaurantsWithCategories ADD CONSTRAINT restaurantsWithCategories_uniqueconstraint UNIQUE(restaurantID, categoryID);
