@@ -6,19 +6,17 @@ function Coupons() {
   const [couponDetails, setCouponDetails] = useState("");
 
   useEffect(() => {
-    console.log("IN EFFECT");
     readCoupons();
   }, []);
 
   function readCoupons() {
-    fetch(`http://localhost:5000/backend/coupons`)
+    fetch(`https://dry-bayou-57145.herokuapp.com/backend/coupons`)
       .then((response) => response.json())
       .then((data) => setCoupons(data));
-    console.log("getCoupons called");
   }
 
   function deleteCoupon(id) {
-    fetch(`http://localhost:5000/backend/coupons/${id}`, {
+    fetch(`https://dry-bayou-57145.herokuapp.com/backend/coupons/${id}`, {
       method: "DELETE",
     }).then(() => console.log(`deleting ${id}`));
     const allCoupons = [...coupons];
@@ -31,23 +29,22 @@ function Coupons() {
     let newCoupon = {
       couponDetails: couponDetails,
     };
-    postCoupon(newCoupon).then((data) =>
-      console.log(`creating new coupon`)
-    );
+    postCoupon(newCoupon)
   }
 
   async function postCoupon(newCoupon) {
-    fetch(`http://localhost:5000/backend/coupons`, {
+    fetch(`https://dry-bayou-57145.herokuapp.com/backend/coupons`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newCoupon),
-    });
-    readCoupons();
+    }).then((response) => response.json())
+    .then(() => readCoupons());;
   }
 
   function onChangeCoupon(event) {
     setCouponDetails(event.target.value);
   }
+  
   return (
     <div>
       <h1>Coupon</h1>

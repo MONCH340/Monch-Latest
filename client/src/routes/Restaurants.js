@@ -9,7 +9,7 @@ import { TableHead  } from '@mui/material';
 
 function Restaurants() {
     const [restaurants, setRestaurants] = useState([])
-    const [coupons, setCoupons] = useState(sample_coupons)
+    const [coupons, setCoupons] = useState([])
 
     function deleteRestaurant (id) {
         alert(`Deleting ${id}`)
@@ -21,8 +21,15 @@ function Restaurants() {
           .then(data => setRestaurants(data))
     }
 
+    function readCoupons() {
+        fetch(`https://dry-bayou-57145.herokuapp.com/backend/coupons`)
+          .then((response) => response.json())
+          .then((data) => setCoupons(data));
+        }
+
     useEffect(() => {
         getRestaurants()
+        readCoupons()
     }, [])
 
     // Create Form Set Up

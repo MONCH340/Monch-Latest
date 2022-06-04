@@ -18,10 +18,14 @@ router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   console.log(`deleting ${id}`);
 
-  let query = `DELETE FROM coupons WHERE couponID = ${id}`;
+  // Update all restaurants that contains this coupon
+  let query1 = `UPDATE Restaurants SET couponID = NULL WHERE couponID = ${id}`
 
-  console.log(query);
+  // Delete the Query
+  let query = `DELETE FROM coupons WHERE couponID = ${id}`;
+  
   try {
+    const temp = await db.promise().query(query1)
     const results = await db.promise().query(query);
     console.log(results);
     if (results[0].affectedRows == 0) {
