@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../database");
 
+// get all coupons
 router.get("/", async (req, res) => {
   let query = "SELECT * FROM Coupons";
   try {
@@ -14,6 +15,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+// delete a coupon
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   console.log(`deleting ${id}`);
@@ -41,6 +43,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// create a coupon
 router.post("/", async (req, res) => {
   let { couponDetails } = req.body;
   let query = `INSERT INTO coupons (couponDetails) VALUES ("${couponDetails}")`;

@@ -13,6 +13,7 @@ import './index.css'
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
+  // Router Details: https://reactrouter.com/docs/en/v6/getting-started/tutorial
   <BrowserRouter>
     <Routes>
     <Route path="/" element={<App />}>

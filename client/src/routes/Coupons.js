@@ -18,12 +18,14 @@ function Coupons() {
     readCoupons();
   }, []);
 
+  // get all coupons
   function readCoupons() {
     fetch(`https://dry-bayou-57145.herokuapp.com/backend/coupons`)
       .then((response) => response.json())
       .then((data) => setCoupons(data));
   }
 
+  // delete a coupon
   function deleteCoupon(id) {
     fetch(`https://dry-bayou-57145.herokuapp.com/backend/coupons/${id}`, {
       method: "DELETE",
@@ -33,6 +35,8 @@ function Coupons() {
     setCoupons(updatedCoupons);
   }
 
+
+  // create a coupon
   function createCoupon(event) {
     event.preventDefault();
     let newCoupon = {

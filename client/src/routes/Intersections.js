@@ -19,12 +19,12 @@ function Intersections() {
   const [categoryID, setCategoryID] = useState([{}]);
 
   useEffect(() => {
-    console.log("IN EFFECT");
     readIntersections();
     readRestaurants();
     readCategories();
   }, []);
 
+  // get the intersection table
   function readIntersections() {
     fetch(`https://dry-bayou-57145.herokuapp.com/backend/intersections`)
       .then((response) => response.json())
@@ -32,6 +32,7 @@ function Intersections() {
     console.log("setIntersections called");
   }
 
+  // delete an intersection
   function deleteIntersection(id) {
     fetch(`https://dry-bayou-57145.herokuapp.com/backend/intersections/${id}`, {
       method: "DELETE",
@@ -43,12 +44,14 @@ function Intersections() {
     setIntersections(updatedIntersections);
   }
 
+  // get all restaurants
   function readRestaurants() {
     fetch("https://dry-bayou-57145.herokuapp.com/backend/restaurants")
       .then((response) => response.json())
       .then((data) => setRestaurants(data));
   }
-
+  
+  // get all categories
   function readCategories() {
     fetch("https://dry-bayou-57145.herokuapp.com/backend/categories")
       .then((response) => response.json())
@@ -64,7 +67,7 @@ function Intersections() {
     setCategoryID(event.target.value);
   }
 
-
+  // create an intersection
   function createIntersection(event) {
     async function postIntersection(newIntersection) {
       fetch(`https://dry-bayou-57145.herokuapp.com/backend/intersections`, {

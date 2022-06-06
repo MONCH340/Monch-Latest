@@ -3,6 +3,7 @@ const router = express.Router();
 const db = require("../database");
 const database = require("../database");
 
+// get all intersections
 router.get("/", async (req, res) => {
   let query =
     "SELECT * FROM restaurantsWithCategories\n" +
@@ -19,6 +20,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+// delete a intersection
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   console.log(`deleting ${id}`);
@@ -40,6 +42,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// update a intersection
 router.put(
   "/category/:categoryID/restaurant/:restaurantID",
   async (req, res) => {
@@ -58,6 +61,7 @@ router.put(
   }
 );
 
+// create an intersection
 router.post("/", async(req, res) => {
   const {categoryID, restaurantID} = req.body
   let query = `INSERT INTO restaurantsWithCategories(categoryID, restaurantID) VALUES (${categoryID}, ${restaurantID})`

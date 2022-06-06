@@ -80,18 +80,21 @@ function Reviews() {
         setSearch(event.target.value)
     }
 
+    // Get all Reviews
   const getReviews = () => {
     fetch('https://dry-bayou-57145.herokuapp.com/backend/reviews')
       .then(response => response.json())
       .then(data => setReviews(data))
   }
 
+  // Get all users
   const getUsers = () => {
     fetch('https://dry-bayou-57145.herokuapp.com/backend/users')
       .then(response => response.json())
       .then(data => setUsers(data))
   }
   
+  // Get all restaurant
   const getRestaurants = () => {
     fetch('https://dry-bayou-57145.herokuapp.com/backend/restaurants')
       .then(response => response.json())
@@ -103,6 +106,7 @@ function Reviews() {
     getUsers()
   }, [])
   
+  // Create a Review
   const postReview = async (newReview) => {
     fetch("https://dry-bayou-57145.herokuapp.com/backend/reviews", {
         method: 'POST',

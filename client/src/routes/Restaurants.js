@@ -11,6 +11,8 @@ function Restaurants() {
     const [restaurants, setRestaurants] = useState([])
     const [coupons, setCoupons] = useState([])
 
+
+    // Delete a restaurant
     function deleteRestaurant (id) {
         removeRestaurant(id)
     }
@@ -23,12 +25,14 @@ function Restaurants() {
     .then(() => getRestaurants());
 
 
+    // get all restaurants
     const getRestaurants = () => {
         fetch('https://dry-bayou-57145.herokuapp.com/backend/restaurants')
           .then(response => response.json())
           .then(data => setRestaurants(data))
     }
 
+    // get all coupons
     function readCoupons() {
         fetch(`https://dry-bayou-57145.herokuapp.com/backend/coupons`)
           .then((response) => response.json())
@@ -71,6 +75,7 @@ function Restaurants() {
         setRestaurantHasNutritionInfo(event.target.value)
     }
 
+    // create restaurants
     function createRestaurant(event) {
         event.preventDefault()
         let newRestaurant = { 
@@ -84,6 +89,7 @@ function Restaurants() {
         // Create API Call and update User if successful
     }
 
+    // create a restaurant
     const postRestaurant = async (newRestaurant) => {
         fetch("https://dry-bayou-57145.herokuapp.com/backend/restaurants", {
             method: 'POST',
@@ -113,6 +119,7 @@ function Restaurants() {
         putRestaurant(restaurantID, couponID)
     }
 
+    // update a restaurant
     const putRestaurant = async (id, couponid) => {
         fetch(`https://dry-bayou-57145.herokuapp.com/backend/restaurants/${id}/coupon/${couponid}`, {
             method: 'PUT'

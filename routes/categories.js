@@ -44,6 +44,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// create a category
 router.post("/", async (req, res) => {
   let { categoryName } = req.body;
   let query_data = `INSERT INTO categories (categoryName) VALUES ("${categoryName}")`;

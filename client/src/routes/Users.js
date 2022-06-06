@@ -32,7 +32,7 @@ function Users() {
     setLocation(event.target.value);
   }
 
-  // API SET UP
+  // Get all users
   const getUsers = () => {
     fetch("https://dry-bayou-57145.herokuapp.com/backend/users/")
       .then((response) => response.json())
@@ -43,8 +43,8 @@ function Users() {
     getUsers();
   }, []);
 
+  // Create a new user
   const postUser = async (newUser) => {
-    //'https://dry-bayou-57145.herokuapp.com/users
     fetch("https://dry-bayou-57145.herokuapp.com/backend/users/", {
       method: 'POST',
       headers: {
@@ -56,9 +56,8 @@ function Users() {
       .then(() => getUsers());
   };
 
-
+  // Delete a user
   const removeUser = (id) =>
-    //'https://dry-bayou-57145.herokuapp.com/users/id
     fetch(`https://dry-bayou-57145.herokuapp.com/backend/users/${id}`, {
       method: "DELETE",
     });

@@ -20,10 +20,12 @@ function Categories() {
     readCategories();
   }, []);
 
+  // Form set up
   function onChangeCategory(event) {
     setCategoryName(event.target.value);
   }
 
+  // get all categories
   const readCategories = () => {
     fetch("https://dry-bayou-57145.herokuapp.com/backend/categories")
       .then((response) => response.json())
@@ -31,6 +33,7 @@ function Categories() {
       .then(()=> console.log("readCategories called"));
   };
 
+  // delete a category 
   const removeCategory = (id) =>
     fetch(`https://dry-bayou-57145.herokuapp.com/backend/categories/${id}`, {
       method: "DELETE",
@@ -46,6 +49,7 @@ function Categories() {
     setCategories(updatedCategories);
   }
 
+  // create a category 
   const postCategory = async (newCategory) => {
     fetch(`https://dry-bayou-57145.herokuapp.com/backend/categories/`, {
       method: "POST",
