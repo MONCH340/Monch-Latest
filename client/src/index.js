@@ -8,6 +8,7 @@ import Restaurants from "./routes/Restaurants";
 import Categories from "./routes/Categories";
 import Coupons from "./routes/Coupons";
 import Intersections from "./routes/Intersections";
+import './index.css'
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -20,7 +21,6 @@ root.render(
       <Route path="categories" element={<Categories />} />
       <Route path="categories_restaurants" element={<Intersections />} />
       <Route path="coupons" element={<Coupons />} />
-
       <Route
       path="*"
       element={

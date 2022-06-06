@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import ReviewRow from "../components/ReviewRow"
 import Button from '@mui/material/Button';
-import {Table, TableCell, TableRow, TableBody, TableContainer, TextField } from '@mui/material/';
+import {Table, TableCell, TableRow, TableBody, TableContainer } from '@mui/material/';
 import { TableHead  } from '@mui/material';
-
+import Form from 'react-bootstrap/Form'
 
 function Reviews() {
     // State Set Up
@@ -119,47 +119,49 @@ function Reviews() {
     return (
         <div>
             <h1>Review</h1>
-            <h3>Search for a Restaurant:</h3>
-            <br />
-            <TextField  size="small" variant="outlined" id="search" onChange={e => onChangeSearch(e)}/>
         <br/>
-        <form onSubmit={createReview}>
+        <Form onSubmit={createReview}>
             <h2>Create a Review</h2>
-            <label htmlFor="userEmail">User Email</label>
-                <select id="userEmail" name="userEmail" onChange={onChangeUserID} required>
+            <Form.Group>
+            <Form.Label htmlFor="userEmail">User Email</Form.Label>
+            <Form.Select id="userEmail" name="userEmail" onChange={onChangeUserID} required>
                     <option> -- select an option -- </option>
                     {users.map((user) => {
                         return <option value={user.userID} key={user.userID}>{user.userEmail}</option>
                     })}
-                </select>
-            <br/>
-            <br/>
-            <label htmlFor="restaurantName">Restaurant Name</label>
-                <select id="restaurantName" name="restaurantName" onChange={onChangeRestaurantID}>
+            </Form.Select>
+            </Form.Group>
+            <Form.Group>
+            <Form.Label htmlFor="restaurantName">Restaurant Name</Form.Label>
+            <Form.Select id="restaurantName" name="restaurantName" onChange={onChangeRestaurantID}>
                 <option> -- select an option -- </option>
                 {restaurants.map((restaurant) => {
                         return <option value={restaurant.restaurantID} key={restaurant.restaurantID}>{restaurant.restaurantName}</option>
                     })}
-                </select>
-            <br/>
-            <br/>
-            <label htmlFor="reviewContent">Review Content</label>
-            <br/>
-            <textarea id="reviewContent" name="reviewContent" rows="10" cols="50" onChange={onChangeReviewContent} required/>
-            <br/>
-            <label htmlFor="reviewStar">reviewStar</label>
-                <select id="reviewStar" name="reviewStar" onChange={onChangeReviewStar} required>
+            </Form.Select>
+            </Form.Group>
+            <Form.Group>
+            <Form.Label htmlFor="reviewContent">Review Content</Form.Label>
+            <Form.Control as="textarea" rows={3} id="reviewContent" name="reviewContent" onChange={onChangeReviewContent} required/>
+            </Form.Group>
+            <Form.Group>
+            <Form.Label htmlFor="reviewStar">reviewStar</Form.Label>
+                <Form.Select id="reviewStar" name="reviewStar" onChange={onChangeReviewStar} required>
                 {[1,2,3,4,5].map((rating) => {
                         return <option value={rating} key={rating}>{rating}</option>
                 })}
-                </select>
-            <br/>
-            <label htmlFor="date">Date of Visit</label>
-            <input type="date" name="date" id="date" onChange={onChangeDate} required/>
-            <br/>
-            <Button type="submit" variant="outlined">Submit</Button>
-        </form>
+                </Form.Select>
+            </Form.Group>
+            <Form.Group>
+            <Form.Label htmlFor="date">Date of Visit</Form.Label>
+            <Form.Control type="date" name="date" id="date" onChange={onChangeDate} required/>
+            </Form.Group>
+            <Button variant="primary" type="submit" value="Submit">Submit</Button>
+        </Form>
         <br/>
+        <h2>Search for a Restaurant:</h2>
+            <br />
+            <Form.Control size="small" variant="outlined" id="search" onChange={e => onChangeSearch(e)}/>
         <TableContainer >
             <Table>
             <TableHead>

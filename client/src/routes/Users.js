@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
+import Form from 'react-bootstrap/Form'
 import UserRow from "../components/UserRow";
+import Button from 'react-bootstrap/Button'
 import {
   Table,
   TableCell,
   TableRow,
   TableBody,
   TableContainer,
-  TextField,
 } from "@mui/material/";
 import { TableHead } from "@mui/material";
 
@@ -85,37 +86,40 @@ function Users() {
   return (
     <div>
       <h1>User</h1>
-      <form onSubmit={createUser}>
+      <Form onSubmit={createUser}>
         <h2>Create a new User</h2>
-        <label htmlFor="userEmail">Email:</label>
-        <input
+        <Form.Group>
+        <Form.Label htmlFor="userEmail">Email address</Form.Label>
+        <Form.Control
           type="email"
           required
           id="userEmail"
           name="userEmail"
           onChange={(e) => onChangeEmail(e)}
         />
-        <br />
-        <label htmlFor="userBirthday">Enter a birthday:</label>
-        <input
+        </Form.Group>
+        <Form.Group>
+        <Form.Label htmlFor="userBirthday">Enter a birthday:</Form.Label>
+        <Form.Control
           type="date"
           required
           id="userBirthday"
           name="userBirthday"
           onChange={(e) => onChangeBirthday(e)}
         />
-        <br />
-        <label htmlFor="userLocation">Enter a Location</label>
-        <input
+        </Form.Group>
+        <Form.Group>
+        <Form.Label htmlFor="userLocation">Enter a Location</Form.Label>
+        <Form.Control
           type="text"
           required
           id="userLocation"
           name="userLocation"
           onChange={(e) => onChangeLocation(e)}
         />
-        <br />
-        <input type="submit" value="Submit" />
-      </form>
+        </Form.Group>
+        <Button variant="primary" type="submit" value="Submit">Submit </Button>
+      </Form>
       <TableContainer>
         <Table>
           <TableHead>

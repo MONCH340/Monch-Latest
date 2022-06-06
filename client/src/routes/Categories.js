@@ -4,11 +4,11 @@ import {
   Table,
   TableCell,
   TableRow,
-  TableBody,
   TableContainer,
-  TextField,
 } from "@mui/material/";
 import { TableHead } from "@mui/material";
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
 function Categories() {
 
@@ -67,20 +67,17 @@ function Categories() {
   return (
     <div>
       <h1>Category</h1>
-
-      
-      <form onSubmit={createCategory}>
+      <Form onSubmit={createCategory}>
         <h2>Create a Category</h2>
-        <label htmlFor="categoryName"> Enter a Category name:</label>
-        <input
+        <Form.Label htmlFor="categoryName">Category Name</Form.Label>
+        <Form.Control
           type="text"
           name="categoryName"
           id="categoryName"
           onChange={(e) => onChangeCategory(e)}
         />
-        <br />
-        <input type="submit" value="Create" />
-      </form>
+                <Button variant="primary" type="submit" value="Submit">Submit </Button>
+      </Form>
       <br />
       <TableContainer>
       <Table>
@@ -98,7 +95,6 @@ function Categories() {
         })}
       </Table>
       </TableContainer>
-
     </div>
   );
 }

@@ -4,7 +4,8 @@ import RestaurantSelect from "../components/RestaurantSelect"
 import CouponSelect from "../components/CouponSelect"
 import {Table, TableCell, TableRow, TableBody, TableContainer, TextField } from '@mui/material/';
 import { TableHead  } from '@mui/material';
-
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
 function Restaurants() {
     const [restaurants, setRestaurants] = useState([])
@@ -124,56 +125,54 @@ function Restaurants() {
     return (
         <div>
         <h1>Restaurant</h1>
-        <h2> Add a Restaurant</h2>
-        <form onSubmit={createRestaurant}>
-            <label htmlFor="restaurantName">Enter a restaurantName</label>
-            <input required type="text" name="restaurantName" id="restaurantName" onChange={e => onChangeRestaurantName(e)}/>
-            <br/>
-            <label htmlFor="restaurantAddress">Enter a restaurantAddress</label>
-            <input required type="text" name="restaurantAddress" id="restaurantAddress" onChange={e => onChangeRestaurantAddress(e)}/>
-            <br/>
-            <label htmlFor="City">Enter a City</label>
-            <input required type="text" name="restaurantCity" id="restaurantCity" onChange={e => onChangeRestaurantCity(e)}/>
-            <br/>
-            <label htmlFor="restaurantPriceRange">Enter a price Range</label>
-            <select required name="restaurantPriceRange" id="restaurantPriceRange" onChange={e => onChangeRestaurantPriceRange(e)}>
+        <h2>Create a Restaurant</h2>
+        <Form onSubmit={createRestaurant}>
+            <Form.Label htmlFor="restaurantName">Enter a restaurantName</Form.Label>
+            <Form.Control required type="text" name="restaurantName" id="restaurantName" onChange={e => onChangeRestaurantName(e)}/>
+            <Form.Label htmlFor="restaurantAddress">Enter a restaurantAddress</Form.Label>
+            <Form.Control required type="text" name="restaurantAddress" id="restaurantAddress" onChange={e => onChangeRestaurantAddress(e)}/>
+
+            <Form.Label htmlFor="City">Enter a City</Form.Label>
+            <Form.Control required type="text" name="restaurantCity" id="restaurantCity" onChange={e => onChangeRestaurantCity(e)}/>
+
+            <Form.Label htmlFor="restaurantPriceRange">Enter a price Range</Form.Label>
+            <Form.Select required name="restaurantPriceRange" id="restaurantPriceRange" onChange={e => onChangeRestaurantPriceRange(e)}>
                 <option value="1">$0-$15</option>
                 <option value="2">$16-$30</option>
                 <option value="3">$31-$50</option>
                 <option value="4">$51-$100</option>
                 <option value="5">$100+</option>
-            </select>
-            <br/>
-            <label htmlFor="restaurantHasNutritionInfo">Does it have nutrition information</label>
-            <select required name="restaurantHasNutritionInfo" id="restaurantHasNutritionInfo" onChange={e => onChangeRestaurantHasNutritionInfo(e)}>
+            </Form.Select>
+
+            <Form.Label htmlFor="restaurantHasNutritionInfo">Does it have nutrition information</Form.Label>
+            <Form.Select required name="restaurantHasNutritionInfo" id="restaurantHasNutritionInfo" onChange={e => onChangeRestaurantHasNutritionInfo(e)}>
                 <option value="TRUE">TRUE</option>
                 <option value="FALSE">FALSE</option>
-            </select>
-            <br/>
-            <button>Submit</button>
-        </form>
+            </Form.Select>
+            <Button type="submit" variant="primary">Submit</Button>
+        </Form>
         <br/>
 
         <h2>Update Deals</h2>
-        <form onSubmit={addCoupon}>
-        <label htmlFor="restaurantID">Select a Restaurant</label>
+        <Form onSubmit={addCoupon}>
+        <Form.Label htmlFor="restaurantID">Select a Restaurant</Form.Label>
 
-        <select name="restaurantID" id="restaurantID" onChange={onChangeRestaurantID} required>
+        <Form.Select name="restaurantID" id="restaurantID" onChange={onChangeRestaurantID} required>
             <option disabled selected value="" > -- select an option -- </option>
             {restaurants.map((restaurant) => {
                     return <RestaurantSelect data={restaurant} />
             })}
-        </select>
+        </Form.Select>
         <br/>
-        <label htmlFor='couponID'>Enter a deal</label>
-        <select name="couponID" id="couponID" onChange={onChangeCouponID} required>
+        <Form.Label htmlFor='couponID'>Enter a deal</Form.Label>
+        <Form.Select name="couponID" id="couponID" onChange={onChangeCouponID} required>
             <option value="NULL" > None (Null)</option>
             {coupons.map((coupon) => {
                     return <CouponSelect data={coupon} />
             })}
-        </select>
-        <button>Submit</button>
-        </form>
+        </Form.Select>
+        <Button type="submit" variant="primary">Submit</Button>
+        </Form>
         <TableContainer>
         <Table>
             <TableHead>

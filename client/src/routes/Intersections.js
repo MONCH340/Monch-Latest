@@ -5,11 +5,11 @@ import {
   Table,
   TableCell,
   TableRow,
-  TableBody,
   TableHead,
   TableContainer,
-  TextField,
 } from "@mui/material/";
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
 function Intersections() {
   const [intersections, setIntersections] = useState([{}]);
@@ -89,15 +89,16 @@ function Intersections() {
     <div>
     <h1>Restaurants with Categories</h1>
     <h2>Associate category to an existing restaurant </h2>
-      <p>* Restaurants can have multiple categories, and categories can have multiple restaurants</p>
-      <form onSubmit={createIntersection}>
-        <label htmlFor="restaurantID">Select a Restaurant</label>
-        <select
+      <Form onSubmit={createIntersection}>
+      <Form.Group>
+        <Form.Label htmlFor="restaurantID">Select a Restaurant</Form.Label>
+        <Form.Select
           name="restaurantID"
           id="restaurantID"
           onChange={onChangeRestaurantID}
           required
         >
+  
           <option disabled selected value="">
             {" "}
             — Select an Option —{" "}
@@ -105,11 +106,10 @@ function Intersections() {
           {restaurants.map((restaurant) => {
             return <RestaurantSelect data={restaurant} />;
           })}
-        </select>
-        <br />
-        <br />
-        <label htmlFor="categoryID">Category</label>
-        <select
+        </Form.Select>
+        </Form.Group>
+        <Form.Label htmlFor="categoryID">Category</Form.Label>
+        <Form.Select
           name="categoryID"
           id="categoryID"
           onChange={onChangeCategoryID}
@@ -126,11 +126,11 @@ function Intersections() {
               </option>
             );
           })}
-        </select>
-        <br />
-        <br />
-        <button>Submit</button>
-      </form>
+        </Form.Select>
+        <Form.Text className="text-muted">Restaurants can have multiple categories, and categories can have multiple restaurants</Form.Text>
+        <br/>
+        <Button variant="primary" type="submit" value="Submit">Submit</Button>
+      </Form>
     
       <h2>Restaurants with Categories Table</h2>
       <TableContainer>

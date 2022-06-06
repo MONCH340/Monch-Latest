@@ -5,10 +5,10 @@ import {
   TableCell,
   TableRow,
   TableBody,
-  TableContainer,
   TableHead,
-  TextField,
 } from "@mui/material/";
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
 function Coupons() {
   const [coupons, setCoupons] = useState([{}]);
@@ -58,19 +58,19 @@ function Coupons() {
     <div>
       <h1>Coupon</h1>
       
-      <form onSubmit={createCoupon}>
+      <Form onSubmit={createCoupon}>
         <h2> Add a known Coupon</h2>
-        <label>Enter Coupon Details</label>
-        <br />
-        <input
+        <Form.Group>
+        <Form.Label >Coupon Details</Form.Label >
+        <Form.Control
           type="text"
           name="couponDetails"
           id="couponDetails"
           onChange={(e) => onChangeCoupon(e)}
         />
-        <br />
-        <button>Submit</button>
-      </form>
+        </Form.Group>
+        <Button variant="primary" type="submit" value="Submit">Submit </Button>
+      </Form>
 
     
       <h2>Coupon Table</h2>

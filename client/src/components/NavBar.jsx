@@ -1,10 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Navbar from 'react-bootstrap/Navbar'
+import Container from 'react-bootstrap/Container'
 
 function NavBar() {
   return (
-    <nav>
-      <Link to="/"> Home </Link>
+    <Navbar bg="light" expand="lg">
+      <Container>
+      <Link to="/"> MONCH </Link>
       <br />
       <Link to="/users">Users</Link>
       <br />
@@ -17,7 +20,8 @@ function NavBar() {
       <Link to="/coupons">Coupons</Link>
       <br />
       <Link to="/categories_restaurants">Restaurant-Category Intersection</Link>
-    </nav>
+      </Container>
+    </Navbar>
   );
 }
 
