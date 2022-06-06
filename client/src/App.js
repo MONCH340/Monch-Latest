@@ -3,15 +3,9 @@ import { Outlet } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container'
-/* 
-  1. Create Sample Data X
-  2. Create Table X
-  3. Create row components X 
-  4. Create form for insert X
-  5. create form for delete -----
-  6. create query for insert/delete ----- 
-  */
 
+
+// React starter guide created here: https://reactjs.org/tutorial/tutorial.html
 function App() {
   return (
     <div>
