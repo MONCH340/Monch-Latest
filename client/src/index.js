@@ -8,6 +8,7 @@ import Restaurants from "./routes/Restaurants";
 import Categories from "./routes/Categories";
 import Coupons from "./routes/Coupons";
 import Intersections from "./routes/Intersections";
+import Home from "./routes/Home";
 import './index.css'
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -15,6 +16,7 @@ root.render(
   <BrowserRouter>
     <Routes>
     <Route path="/" element={<App />}>
+      <Route path="home" element={<Home />} />
       <Route path="users" element={<Users />} />
       <Route path="reviews" element={<Reviews />} />
       <Route path="restaurants" element={<Restaurants />} />

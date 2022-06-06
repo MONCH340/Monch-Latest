@@ -5,3 +5,18 @@ h1 {
 h2 {
     padding-top: 10px;
 }
+
+.Home > h2 {
+  text-align: center;
+  margin-top: 25%;
+}
+
+.Home > p {
+  margin-top: 10%;
+  text-align: center;
+}
+
+.links {
+  text-decoration: none;
+  color: black;
+}

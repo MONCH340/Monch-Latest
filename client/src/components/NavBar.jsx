@@ -7,19 +7,19 @@ function NavBar() {
   return (
     <Navbar bg="light" expand="lg">
       <Container>
-      <Link to="/"> MONCH </Link>
+      <Link class="links" to="/home"> MONCH </Link>
       <br />
-      <Link to="/users">Users</Link>
+      <Link class="links"  to="/users">Users</Link>
       <br />
-      <Link to="/reviews">Reviews</Link>
+      <Link class="links"  to="/reviews">Reviews</Link>
       <br />
-      <Link to="/restaurants">Restaurants</Link>
+      <Link class="links"  to="/restaurants">Restaurants</Link>
       <br />
-      <Link to="/categories">Categories</Link>
+      <Link class="links"  to="/categories">Categories</Link>
       <br />
-      <Link to="/coupons">Coupons</Link>
+      <Link class="links"  to="/coupons">Coupons</Link>
       <br />
-      <Link to="/categories_restaurants">Restaurant-Category Intersection</Link>
+      <Link class="links" to="/categories_restaurants">Restaurant-Category Intersection</Link>
       </Container>
     </Navbar>
   );
