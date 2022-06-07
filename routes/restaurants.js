@@ -36,6 +36,21 @@ router.post("/", async (req, res) => {
     })
   }
 });
+router.put("/update", async (req, res) => {
+  const {RestaurantID, restaurantAddress, restaurantCity, restaurantPriceRange, restaurantHasNutritionInfo} = req.body
+  let query_data = `UPDATE Restaurants SET restaurantAddress = "${restaurantAddress}", restaurantCity = "${restaurantCity}", restaurantPriceRange = ${restaurantPriceRange},\
+                    restaurantHasNutritionInfo = ${restaurantHasNutritionInfo} WHERE restaurantID = ${RestaurantID}`
+  try {
+    const results = await database.promise().query(query_data)
+    // Return all data in json format
+    res.status(201).send(results[0])
+  } catch (err) {
+    console.log(err)
+    res.status(400).send({
+      error: err.message
+    })
+  }
+})
 
 // Handles a put request 
 router.put("/:id/coupon/:couponid", async (req, res) => {

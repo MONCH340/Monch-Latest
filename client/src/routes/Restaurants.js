@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import RestaurantRow from "../components/RestaurantRow"
 import RestaurantSelect from "../components/RestaurantSelect"
 import CouponSelect from "../components/CouponSelect"
-import {Table, TableCell, TableRow, TableBody, TableContainer, TextField } from '@mui/material/';
+import {Table, TableCell, TableRow, TableBody, TableContainer } from '@mui/material/';
 import { TableHead  } from '@mui/material';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -43,6 +43,58 @@ function Restaurants() {
         getRestaurants()
         readCoupons()
     }, [])
+
+    // PUT FORM SET UP
+        // Create Form Set Up
+        const [restaurantIDPUT, setRestaurantIDPUT] = useState("")
+        const [restaurantAddressPUT, setRestaurantAddressPUT] = useState("")
+        const [restaurantCityPUT, setRestaurantCityPUT] = useState("")
+        const [restaurantPriceRangePUT, setRestaurantPriceRangePUT] = useState(1)
+        const [restaurantHasNutritionInfoPUT, setRestaurantHasNutritionInfoPUT] = useState("TRUE")
+        
+        
+        function onChangeRestaurantIDPUT(event) {
+            setRestaurantIDPUT(event.target.value)
+        }
+    
+        function onChangeRestaurantAddressPUT(event) {
+            setRestaurantAddressPUT(event.target.value)
+        }    
+
+        function onChangeRestaurantCityPUT(event) {
+            setRestaurantCityPUT(event.target.value)
+        }
+    
+        function onChangeRestaurantPriceRangePUT(event) {
+            setRestaurantPriceRangePUT(event.target.value)
+        }
+    
+        function onChangeRestaurantHasNutritionInfoPUT(event) {
+            setRestaurantHasNutritionInfoPUT(event.target.value)
+        }
+
+        // put a restuarant request
+    function updateRestaurant(event) {
+        event.preventDefault()
+        let updateRestaurant = { 
+            RestaurantID: restaurantIDPUT,
+            restaurantAddress: restaurantAddressPUT,
+            restaurantCity: restaurantCityPUT,
+            restaurantPriceRange: restaurantPriceRangePUT,
+            restaurantHasNutritionInfo: restaurantHasNutritionInfoPUT,
+          }
+        fetch("https://dry-bayou-57145.herokuapp.com/backend/restaurants/update", {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updateRestaurant)
+          })
+          .then(response => response.json())
+          .then(data => getRestaurants())
+        // Create API Call and update User if successful
+    }
+        
 
     // Create Form Set Up
     const [restaurantName, setRestaurantName] = useState("")
@@ -102,6 +154,7 @@ function Restaurants() {
           .then(data => getRestaurants())
     }
 
+
     // PUT Form Set Up
     const [couponID, setCouponID] = useState("Null")
     const [restaurantID, setRestaurantID] = useState()
@@ -159,10 +212,46 @@ function Restaurants() {
             <Button type="submit" variant="primary">Submit</Button>
         </Form>
         <br/>
+       
+       
+        <h2>Update Restaurant - M:M</h2>
+        <Form onSubmit={updateRestaurant}> 
+        <Form.Label htmlFor="EditRestaurantID">Select a Restaurant</Form.Label>
+        <Form.Select name="EditRestaurantID" id="EditRestaurantID" onChange={onChangeRestaurantIDPUT} required>
+            <option disabled selected value="" > -- select an option -- </option>
+            {restaurants.map((restaurant) => {
+                    return <RestaurantSelect data={restaurant} />
+            })}
+        </Form.Select>
 
-        <h2>Update Deals</h2>
+        <Form.Label htmlFor="PUTrestaurantAddress">Update the Restaurant Address</Form.Label>
+        <Form.Control required type="text" name="PUTrestaurantAddress" id="PUTrestaurantAddress" onChange={e => onChangeRestaurantAddressPUT(e)}/>
+
+        <Form.Label htmlFor="PUTCity">Update a City</Form.Label>
+        <Form.Control required type="text" name="PUTCity" id="PUTCity" onChange={e => onChangeRestaurantCityPUT(e)}/>
+
+        <Form.Label htmlFor="PUTrestaurantPriceRange">Update the price Range</Form.Label>
+        <Form.Select required name="PUTrestaurantPriceRange" id="PUTrestaurantPriceRange" onChange={e => onChangeRestaurantPriceRangePUT(e)}>
+                <option value="1">$0-$15</option>
+                <option value="2">$16-$30</option>
+                <option value="3">$31-$50</option>
+                <option value="4">$51-$100</option>
+                <option value="5">$100+</option>
+        </Form.Select>
+
+        <Form.Label htmlFor="PUTrestaurantHasNutritionInfo">Update nutrition information</Form.Label>
+            <Form.Select required name="PUTrestaurantHasNutritionInfo" id="PUTrestaurantHasNutritionInfo" onChange={e => onChangeRestaurantHasNutritionInfoPUT(e)}>
+                <option value="TRUE">TRUE</option>
+                <option value="FALSE">FALSE</option>
+            </Form.Select>
+
+
+        <Button type="submit" variant="primary">Submit</Button>
+        </Form>
+
+        <h2>Update Deals - NULLABLE 1:M</h2>
         <Form onSubmit={addCoupon}>
-        <Form.Label htmlFor="restaurantID">Select a Restaurant</Form.Label>
+        <Form.Label htmlFor="restaurantIDEDIT">Select a Restaurant</Form.Label>
 
         <Form.Select name="restaurantID" id="restaurantID" onChange={onChangeRestaurantID} required>
             <option disabled selected value="" > -- select an option -- </option>
@@ -170,6 +259,7 @@ function Restaurants() {
                     return <RestaurantSelect data={restaurant} />
             })}
         </Form.Select>
+
         <br/>
         <Form.Label htmlFor='couponID'>Enter a deal</Form.Label>
         <Form.Select name="couponID" id="couponID" onChange={onChangeCouponID} required>
