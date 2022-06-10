@@ -1,3 +1,4 @@
+require('dotenv').config();
 const config = {
     db: {
       host: process.env.host,
