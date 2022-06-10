@@ -33,6 +33,8 @@ VALUES (:restaurantName, :restaurantAddress, :restaurantCity, :restaurantPriceRa
 
 UPDATE Restaurants set couponID=:couponID WHERE Restaurant=:Restaurant
 
+UPDATE Restaurants SET restaurantAddress=:restaurantAddress, restaurantCity=:restaurantCity, restaurantPriceRange=:restaurantPriceRange,
+                    restaurantHasNutritionInfo=:restaurantHasNutritionInfo WHERE restaurantID=:restaurantID
 
 -- RestaurantsWithCategories Page
 SELECT * FROM RestaurantsWithCategories
