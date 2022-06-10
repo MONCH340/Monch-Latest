@@ -214,7 +214,7 @@ function Restaurants() {
         <br/>
        
        
-        <h2>Update Restaurant - M:M</h2>
+        <h2>Update Restaurant</h2>
         <Form onSubmit={updateRestaurant}> 
         <Form.Label htmlFor="EditRestaurantID">Select a Restaurant</Form.Label>
         <Form.Select name="EditRestaurantID" id="EditRestaurantID" onChange={onChangeRestaurantIDPUT} required>
@@ -249,7 +249,7 @@ function Restaurants() {
         <Button type="submit" variant="primary">Submit</Button>
         </Form>
 
-        <h2>Update Deals - NULLABLE 1:M</h2>
+        <h2>Update Deals</h2>
         <Form onSubmit={addCoupon}>
         <Form.Label htmlFor="restaurantIDEDIT">Select a Restaurant</Form.Label>
 
